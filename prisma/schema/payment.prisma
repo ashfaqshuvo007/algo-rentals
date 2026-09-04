@@ -5,7 +5,7 @@ model Payment {
   rentalAgreementId  String?
   agreement          Agreement?    @relation(fields: [rentalAgreementId], references: [id])
   type               PaymentType
-  method             PaymentMethod
+  method             PaymentMethod @default(BKASH)
   amount             Decimal
   bkashTransactionId String?       @unique
   gatewayResponse    Json?

@@ -4,4 +4,6 @@ model Property {
   address   String
   units     Unit[]
   createdAt DateTime @default(now())
+
+  @@map("properties")
 }

@@ -20,4 +20,6 @@ model Unit {
 
   @@unique([propertyId, unitNo])
   @@index([status])
+  @@map("units")
+  
 }

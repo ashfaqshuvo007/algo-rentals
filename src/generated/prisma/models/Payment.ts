@@ -338,7 +338,7 @@ export type PaymentScalarWhereWithAggregatesInput = {
 export type PaymentCreateInput = {
   id?: string
   type: $Enums.PaymentType
-  method: $Enums.PaymentMethod
+  method?: $Enums.PaymentMethod
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
   bkashTransactionId?: string | null
   gatewayResponse?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -354,7 +354,7 @@ export type PaymentUncheckedCreateInput = {
   tenantProfileId?: string | null
   rentalAgreementId?: string | null
   type: $Enums.PaymentType
-  method: $Enums.PaymentMethod
+  method?: $Enums.PaymentMethod
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
   bkashTransactionId?: string | null
   gatewayResponse?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -396,7 +396,7 @@ export type PaymentCreateManyInput = {
   tenantProfileId?: string | null
   rentalAgreementId?: string | null
   type: $Enums.PaymentType
-  method: $Enums.PaymentMethod
+  method?: $Enums.PaymentMethod
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
   bkashTransactionId?: string | null
   gatewayResponse?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -587,7 +587,7 @@ export type PaymentUncheckedUpdateOneWithoutTenantNestedInput = {
 export type PaymentCreateWithoutAgreementInput = {
   id?: string
   type: $Enums.PaymentType
-  method: $Enums.PaymentMethod
+  method?: $Enums.PaymentMethod
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
   bkashTransactionId?: string | null
   gatewayResponse?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -601,7 +601,7 @@ export type PaymentUncheckedCreateWithoutAgreementInput = {
   id?: string
   tenantProfileId?: string | null
   type: $Enums.PaymentType
-  method: $Enums.PaymentMethod
+  method?: $Enums.PaymentMethod
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
   bkashTransactionId?: string | null
   gatewayResponse?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -656,7 +656,7 @@ export type PaymentScalarWhereInput = {
 export type PaymentCreateWithoutTenantInput = {
   id?: string
   type: $Enums.PaymentType
-  method: $Enums.PaymentMethod
+  method?: $Enums.PaymentMethod
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
   bkashTransactionId?: string | null
   gatewayResponse?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -670,7 +670,7 @@ export type PaymentUncheckedCreateWithoutTenantInput = {
   id?: string
   rentalAgreementId?: string | null
   type: $Enums.PaymentType
-  method: $Enums.PaymentMethod
+  method?: $Enums.PaymentMethod
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
   bkashTransactionId?: string | null
   gatewayResponse?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -725,7 +725,7 @@ export type PaymentCreateManyAgreementInput = {
   id?: string
   tenantProfileId?: string | null
   type: $Enums.PaymentType
-  method: $Enums.PaymentMethod
+  method?: $Enums.PaymentMethod
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
   bkashTransactionId?: string | null
   gatewayResponse?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
