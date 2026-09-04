@@ -6,8 +6,8 @@ import { redisClient } from "./app/lib/redis";
 import {
 	seedAdmin,
 	seedSuperAdmin,
-	seedTestDoctor,
-	seedTestPatient,
+	seedTestOwner,
+	seedTestTenant,
 } from "./app/utils/dbSeed";
 
 const PORT = config.port;
@@ -22,8 +22,8 @@ const main = async () => {
 
 		await seedSuperAdmin();
 		await seedAdmin();
-		await seedTestDoctor();
-		await seedTestPatient();
+		await seedTestOwner();
+		await seedTestTenant();
 		console.log("DB Seeded With Test Data Successfully.");
 
 		await transporter.verify();

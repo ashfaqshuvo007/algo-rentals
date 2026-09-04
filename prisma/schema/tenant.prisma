@@ -1,25 +1,28 @@
 model Tenant {
-  id String @id @default(uuid())
+  id String @id @default(uuid(7))
 
-  name             String
-  email            String    @unique
-  contactNumber    String?
-  address          String?
+  name          String
+  email         String  @unique
+  nidNumber        String    @unique
+  presentAddress   String
+
+  permanentAddress String?
+  emergencyContact String?
+  contactNumber String?
+  //Media
   nidUrl           String?
   nidUrlPublicId   String?
+
   isDeleted        Boolean   @default(false)
   deletedAt        DateTime?
   createdAt        DateTime  @default(now())
   updatedAt        DateTime  @updatedAt
-  nidNumber        String    @unique
-  presentAddress   String
-  permanentAddress String?
-  emergencyContact String?
-  //relations
-  userId           String    @unique
-  user             User      @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 
-  agreementId String     @unique
+  //relations
+  userId String @unique
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+
+  agreementId String?     @unique
   agreement   Agreement?
 
   payment Payment?

@@ -28,18 +28,17 @@ export type TenantMinAggregateOutputType = {
   id: string | null
   name: string | null
   email: string | null
+  nidNumber: string | null
+  presentAddress: string | null
+  permanentAddress: string | null
+  emergencyContact: string | null
   contactNumber: string | null
-  address: string | null
   nidUrl: string | null
   nidUrlPublicId: string | null
   isDeleted: boolean | null
   deletedAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
-  nidNumber: string | null
-  presentAddress: string | null
-  permanentAddress: string | null
-  emergencyContact: string | null
   userId: string | null
   agreementId: string | null
 }
@@ -48,18 +47,17 @@ export type TenantMaxAggregateOutputType = {
   id: string | null
   name: string | null
   email: string | null
+  nidNumber: string | null
+  presentAddress: string | null
+  permanentAddress: string | null
+  emergencyContact: string | null
   contactNumber: string | null
-  address: string | null
   nidUrl: string | null
   nidUrlPublicId: string | null
   isDeleted: boolean | null
   deletedAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
-  nidNumber: string | null
-  presentAddress: string | null
-  permanentAddress: string | null
-  emergencyContact: string | null
   userId: string | null
   agreementId: string | null
 }
@@ -68,18 +66,17 @@ export type TenantCountAggregateOutputType = {
   id: number
   name: number
   email: number
+  nidNumber: number
+  presentAddress: number
+  permanentAddress: number
+  emergencyContact: number
   contactNumber: number
-  address: number
   nidUrl: number
   nidUrlPublicId: number
   isDeleted: number
   deletedAt: number
   createdAt: number
   updatedAt: number
-  nidNumber: number
-  presentAddress: number
-  permanentAddress: number
-  emergencyContact: number
   userId: number
   agreementId: number
   _all: number
@@ -90,18 +87,17 @@ export type TenantMinAggregateInputType = {
   id?: true
   name?: true
   email?: true
+  nidNumber?: true
+  presentAddress?: true
+  permanentAddress?: true
+  emergencyContact?: true
   contactNumber?: true
-  address?: true
   nidUrl?: true
   nidUrlPublicId?: true
   isDeleted?: true
   deletedAt?: true
   createdAt?: true
   updatedAt?: true
-  nidNumber?: true
-  presentAddress?: true
-  permanentAddress?: true
-  emergencyContact?: true
   userId?: true
   agreementId?: true
 }
@@ -110,18 +106,17 @@ export type TenantMaxAggregateInputType = {
   id?: true
   name?: true
   email?: true
+  nidNumber?: true
+  presentAddress?: true
+  permanentAddress?: true
+  emergencyContact?: true
   contactNumber?: true
-  address?: true
   nidUrl?: true
   nidUrlPublicId?: true
   isDeleted?: true
   deletedAt?: true
   createdAt?: true
   updatedAt?: true
-  nidNumber?: true
-  presentAddress?: true
-  permanentAddress?: true
-  emergencyContact?: true
   userId?: true
   agreementId?: true
 }
@@ -130,18 +125,17 @@ export type TenantCountAggregateInputType = {
   id?: true
   name?: true
   email?: true
+  nidNumber?: true
+  presentAddress?: true
+  permanentAddress?: true
+  emergencyContact?: true
   contactNumber?: true
-  address?: true
   nidUrl?: true
   nidUrlPublicId?: true
   isDeleted?: true
   deletedAt?: true
   createdAt?: true
   updatedAt?: true
-  nidNumber?: true
-  presentAddress?: true
-  permanentAddress?: true
-  emergencyContact?: true
   userId?: true
   agreementId?: true
   _all?: true
@@ -223,20 +217,19 @@ export type TenantGroupByOutputType = {
   id: string
   name: string
   email: string
+  nidNumber: string
+  presentAddress: string
+  permanentAddress: string | null
+  emergencyContact: string | null
   contactNumber: string | null
-  address: string | null
   nidUrl: string | null
   nidUrlPublicId: string | null
   isDeleted: boolean
   deletedAt: Date | null
   createdAt: Date
   updatedAt: Date
-  nidNumber: string
-  presentAddress: string
-  permanentAddress: string | null
-  emergencyContact: string | null
   userId: string
-  agreementId: string
+  agreementId: string | null
   _count: TenantCountAggregateOutputType | null
   _min: TenantMinAggregateOutputType | null
   _max: TenantMaxAggregateOutputType | null
@@ -264,20 +257,19 @@ export type TenantWhereInput = {
   id?: Prisma.StringFilter<"Tenant"> | string
   name?: Prisma.StringFilter<"Tenant"> | string
   email?: Prisma.StringFilter<"Tenant"> | string
+  nidNumber?: Prisma.StringFilter<"Tenant"> | string
+  presentAddress?: Prisma.StringFilter<"Tenant"> | string
+  permanentAddress?: Prisma.StringNullableFilter<"Tenant"> | string | null
+  emergencyContact?: Prisma.StringNullableFilter<"Tenant"> | string | null
   contactNumber?: Prisma.StringNullableFilter<"Tenant"> | string | null
-  address?: Prisma.StringNullableFilter<"Tenant"> | string | null
   nidUrl?: Prisma.StringNullableFilter<"Tenant"> | string | null
   nidUrlPublicId?: Prisma.StringNullableFilter<"Tenant"> | string | null
   isDeleted?: Prisma.BoolFilter<"Tenant"> | boolean
   deletedAt?: Prisma.DateTimeNullableFilter<"Tenant"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Tenant"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Tenant"> | Date | string
-  nidNumber?: Prisma.StringFilter<"Tenant"> | string
-  presentAddress?: Prisma.StringFilter<"Tenant"> | string
-  permanentAddress?: Prisma.StringNullableFilter<"Tenant"> | string | null
-  emergencyContact?: Prisma.StringNullableFilter<"Tenant"> | string | null
   userId?: Prisma.StringFilter<"Tenant"> | string
-  agreementId?: Prisma.StringFilter<"Tenant"> | string
+  agreementId?: Prisma.StringNullableFilter<"Tenant"> | string | null
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   agreement?: Prisma.XOR<Prisma.AgreementNullableScalarRelationFilter, Prisma.AgreementWhereInput> | null
   payment?: Prisma.XOR<Prisma.PaymentNullableScalarRelationFilter, Prisma.PaymentWhereInput> | null
@@ -287,20 +279,19 @@ export type TenantOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   email?: Prisma.SortOrder
+  nidNumber?: Prisma.SortOrder
+  presentAddress?: Prisma.SortOrder
+  permanentAddress?: Prisma.SortOrderInput | Prisma.SortOrder
+  emergencyContact?: Prisma.SortOrderInput | Prisma.SortOrder
   contactNumber?: Prisma.SortOrderInput | Prisma.SortOrder
-  address?: Prisma.SortOrderInput | Prisma.SortOrder
   nidUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   nidUrlPublicId?: Prisma.SortOrderInput | Prisma.SortOrder
   isDeleted?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  nidNumber?: Prisma.SortOrder
-  presentAddress?: Prisma.SortOrder
-  permanentAddress?: Prisma.SortOrderInput | Prisma.SortOrder
-  emergencyContact?: Prisma.SortOrderInput | Prisma.SortOrder
   userId?: Prisma.SortOrder
-  agreementId?: Prisma.SortOrder
+  agreementId?: Prisma.SortOrderInput | Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
   agreement?: Prisma.AgreementOrderByWithRelationInput
   payment?: Prisma.PaymentOrderByWithRelationInput
@@ -316,17 +307,16 @@ export type TenantWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.TenantWhereInput[]
   NOT?: Prisma.TenantWhereInput | Prisma.TenantWhereInput[]
   name?: Prisma.StringFilter<"Tenant"> | string
+  presentAddress?: Prisma.StringFilter<"Tenant"> | string
+  permanentAddress?: Prisma.StringNullableFilter<"Tenant"> | string | null
+  emergencyContact?: Prisma.StringNullableFilter<"Tenant"> | string | null
   contactNumber?: Prisma.StringNullableFilter<"Tenant"> | string | null
-  address?: Prisma.StringNullableFilter<"Tenant"> | string | null
   nidUrl?: Prisma.StringNullableFilter<"Tenant"> | string | null
   nidUrlPublicId?: Prisma.StringNullableFilter<"Tenant"> | string | null
   isDeleted?: Prisma.BoolFilter<"Tenant"> | boolean
   deletedAt?: Prisma.DateTimeNullableFilter<"Tenant"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Tenant"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Tenant"> | Date | string
-  presentAddress?: Prisma.StringFilter<"Tenant"> | string
-  permanentAddress?: Prisma.StringNullableFilter<"Tenant"> | string | null
-  emergencyContact?: Prisma.StringNullableFilter<"Tenant"> | string | null
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   agreement?: Prisma.XOR<Prisma.AgreementNullableScalarRelationFilter, Prisma.AgreementWhereInput> | null
   payment?: Prisma.XOR<Prisma.PaymentNullableScalarRelationFilter, Prisma.PaymentWhereInput> | null
@@ -336,20 +326,19 @@ export type TenantOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   email?: Prisma.SortOrder
+  nidNumber?: Prisma.SortOrder
+  presentAddress?: Prisma.SortOrder
+  permanentAddress?: Prisma.SortOrderInput | Prisma.SortOrder
+  emergencyContact?: Prisma.SortOrderInput | Prisma.SortOrder
   contactNumber?: Prisma.SortOrderInput | Prisma.SortOrder
-  address?: Prisma.SortOrderInput | Prisma.SortOrder
   nidUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   nidUrlPublicId?: Prisma.SortOrderInput | Prisma.SortOrder
   isDeleted?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  nidNumber?: Prisma.SortOrder
-  presentAddress?: Prisma.SortOrder
-  permanentAddress?: Prisma.SortOrderInput | Prisma.SortOrder
-  emergencyContact?: Prisma.SortOrderInput | Prisma.SortOrder
   userId?: Prisma.SortOrder
-  agreementId?: Prisma.SortOrder
+  agreementId?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.TenantCountOrderByAggregateInput
   _max?: Prisma.TenantMaxOrderByAggregateInput
   _min?: Prisma.TenantMinOrderByAggregateInput
@@ -362,39 +351,37 @@ export type TenantScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"Tenant"> | string
   name?: Prisma.StringWithAggregatesFilter<"Tenant"> | string
   email?: Prisma.StringWithAggregatesFilter<"Tenant"> | string
+  nidNumber?: Prisma.StringWithAggregatesFilter<"Tenant"> | string
+  presentAddress?: Prisma.StringWithAggregatesFilter<"Tenant"> | string
+  permanentAddress?: Prisma.StringNullableWithAggregatesFilter<"Tenant"> | string | null
+  emergencyContact?: Prisma.StringNullableWithAggregatesFilter<"Tenant"> | string | null
   contactNumber?: Prisma.StringNullableWithAggregatesFilter<"Tenant"> | string | null
-  address?: Prisma.StringNullableWithAggregatesFilter<"Tenant"> | string | null
   nidUrl?: Prisma.StringNullableWithAggregatesFilter<"Tenant"> | string | null
   nidUrlPublicId?: Prisma.StringNullableWithAggregatesFilter<"Tenant"> | string | null
   isDeleted?: Prisma.BoolWithAggregatesFilter<"Tenant"> | boolean
   deletedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Tenant"> | Date | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Tenant"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Tenant"> | Date | string
-  nidNumber?: Prisma.StringWithAggregatesFilter<"Tenant"> | string
-  presentAddress?: Prisma.StringWithAggregatesFilter<"Tenant"> | string
-  permanentAddress?: Prisma.StringNullableWithAggregatesFilter<"Tenant"> | string | null
-  emergencyContact?: Prisma.StringNullableWithAggregatesFilter<"Tenant"> | string | null
   userId?: Prisma.StringWithAggregatesFilter<"Tenant"> | string
-  agreementId?: Prisma.StringWithAggregatesFilter<"Tenant"> | string
+  agreementId?: Prisma.StringNullableWithAggregatesFilter<"Tenant"> | string | null
 }
 
 export type TenantCreateInput = {
   id?: string
   name: string
   email: string
+  nidNumber: string
+  presentAddress: string
+  permanentAddress?: string | null
+  emergencyContact?: string | null
   contactNumber?: string | null
-  address?: string | null
   nidUrl?: string | null
   nidUrlPublicId?: string | null
   isDeleted?: boolean
   deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  nidNumber: string
-  presentAddress: string
-  permanentAddress?: string | null
-  emergencyContact?: string | null
-  agreementId: string
+  agreementId?: string | null
   user: Prisma.UserCreateNestedOneWithoutTenantInput
   agreement?: Prisma.AgreementCreateNestedOneWithoutTenantInput
   payment?: Prisma.PaymentCreateNestedOneWithoutTenantInput
@@ -404,20 +391,19 @@ export type TenantUncheckedCreateInput = {
   id?: string
   name: string
   email: string
+  nidNumber: string
+  presentAddress: string
+  permanentAddress?: string | null
+  emergencyContact?: string | null
   contactNumber?: string | null
-  address?: string | null
   nidUrl?: string | null
   nidUrlPublicId?: string | null
   isDeleted?: boolean
   deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  nidNumber: string
-  presentAddress: string
-  permanentAddress?: string | null
-  emergencyContact?: string | null
   userId: string
-  agreementId: string
+  agreementId?: string | null
   agreement?: Prisma.AgreementUncheckedCreateNestedOneWithoutTenantInput
   payment?: Prisma.PaymentUncheckedCreateNestedOneWithoutTenantInput
 }
@@ -426,19 +412,18 @@ export type TenantUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  nidNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  presentAddress?: Prisma.StringFieldUpdateOperationsInput | string
+  permanentAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emergencyContact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nidUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nidUrlPublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  nidNumber?: Prisma.StringFieldUpdateOperationsInput | string
-  presentAddress?: Prisma.StringFieldUpdateOperationsInput | string
-  permanentAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  emergencyContact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  agreementId?: Prisma.StringFieldUpdateOperationsInput | string
+  agreementId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user?: Prisma.UserUpdateOneRequiredWithoutTenantNestedInput
   agreement?: Prisma.AgreementUpdateOneWithoutTenantNestedInput
   payment?: Prisma.PaymentUpdateOneWithoutTenantNestedInput
@@ -448,20 +433,19 @@ export type TenantUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  nidNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  presentAddress?: Prisma.StringFieldUpdateOperationsInput | string
+  permanentAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emergencyContact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nidUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nidUrlPublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  nidNumber?: Prisma.StringFieldUpdateOperationsInput | string
-  presentAddress?: Prisma.StringFieldUpdateOperationsInput | string
-  permanentAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  emergencyContact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userId?: Prisma.StringFieldUpdateOperationsInput | string
-  agreementId?: Prisma.StringFieldUpdateOperationsInput | string
+  agreementId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreement?: Prisma.AgreementUncheckedUpdateOneWithoutTenantNestedInput
   payment?: Prisma.PaymentUncheckedUpdateOneWithoutTenantNestedInput
 }
@@ -470,59 +454,56 @@ export type TenantCreateManyInput = {
   id?: string
   name: string
   email: string
+  nidNumber: string
+  presentAddress: string
+  permanentAddress?: string | null
+  emergencyContact?: string | null
   contactNumber?: string | null
-  address?: string | null
   nidUrl?: string | null
   nidUrlPublicId?: string | null
   isDeleted?: boolean
   deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  nidNumber: string
-  presentAddress: string
-  permanentAddress?: string | null
-  emergencyContact?: string | null
   userId: string
-  agreementId: string
+  agreementId?: string | null
 }
 
 export type TenantUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  nidNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  presentAddress?: Prisma.StringFieldUpdateOperationsInput | string
+  permanentAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emergencyContact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nidUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nidUrlPublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  nidNumber?: Prisma.StringFieldUpdateOperationsInput | string
-  presentAddress?: Prisma.StringFieldUpdateOperationsInput | string
-  permanentAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  emergencyContact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  agreementId?: Prisma.StringFieldUpdateOperationsInput | string
+  agreementId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type TenantUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  nidNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  presentAddress?: Prisma.StringFieldUpdateOperationsInput | string
+  permanentAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emergencyContact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nidUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nidUrlPublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  nidNumber?: Prisma.StringFieldUpdateOperationsInput | string
-  presentAddress?: Prisma.StringFieldUpdateOperationsInput | string
-  permanentAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  emergencyContact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userId?: Prisma.StringFieldUpdateOperationsInput | string
-  agreementId?: Prisma.StringFieldUpdateOperationsInput | string
+  agreementId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type TenantScalarRelationFilter = {
@@ -539,18 +520,17 @@ export type TenantCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   email?: Prisma.SortOrder
+  nidNumber?: Prisma.SortOrder
+  presentAddress?: Prisma.SortOrder
+  permanentAddress?: Prisma.SortOrder
+  emergencyContact?: Prisma.SortOrder
   contactNumber?: Prisma.SortOrder
-  address?: Prisma.SortOrder
   nidUrl?: Prisma.SortOrder
   nidUrlPublicId?: Prisma.SortOrder
   isDeleted?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  nidNumber?: Prisma.SortOrder
-  presentAddress?: Prisma.SortOrder
-  permanentAddress?: Prisma.SortOrder
-  emergencyContact?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   agreementId?: Prisma.SortOrder
 }
@@ -559,18 +539,17 @@ export type TenantMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   email?: Prisma.SortOrder
+  nidNumber?: Prisma.SortOrder
+  presentAddress?: Prisma.SortOrder
+  permanentAddress?: Prisma.SortOrder
+  emergencyContact?: Prisma.SortOrder
   contactNumber?: Prisma.SortOrder
-  address?: Prisma.SortOrder
   nidUrl?: Prisma.SortOrder
   nidUrlPublicId?: Prisma.SortOrder
   isDeleted?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  nidNumber?: Prisma.SortOrder
-  presentAddress?: Prisma.SortOrder
-  permanentAddress?: Prisma.SortOrder
-  emergencyContact?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   agreementId?: Prisma.SortOrder
 }
@@ -579,18 +558,17 @@ export type TenantMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   email?: Prisma.SortOrder
+  nidNumber?: Prisma.SortOrder
+  presentAddress?: Prisma.SortOrder
+  permanentAddress?: Prisma.SortOrder
+  emergencyContact?: Prisma.SortOrder
   contactNumber?: Prisma.SortOrder
-  address?: Prisma.SortOrder
   nidUrl?: Prisma.SortOrder
   nidUrlPublicId?: Prisma.SortOrder
   isDeleted?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  nidNumber?: Prisma.SortOrder
-  presentAddress?: Prisma.SortOrder
-  permanentAddress?: Prisma.SortOrder
-  emergencyContact?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   agreementId?: Prisma.SortOrder
 }
@@ -665,19 +643,18 @@ export type TenantCreateWithoutAgreementInput = {
   id?: string
   name: string
   email: string
+  nidNumber: string
+  presentAddress: string
+  permanentAddress?: string | null
+  emergencyContact?: string | null
   contactNumber?: string | null
-  address?: string | null
   nidUrl?: string | null
   nidUrlPublicId?: string | null
   isDeleted?: boolean
   deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  nidNumber: string
-  presentAddress: string
-  permanentAddress?: string | null
-  emergencyContact?: string | null
-  agreementId: string
+  agreementId?: string | null
   user: Prisma.UserCreateNestedOneWithoutTenantInput
   payment?: Prisma.PaymentCreateNestedOneWithoutTenantInput
 }
@@ -686,20 +663,19 @@ export type TenantUncheckedCreateWithoutAgreementInput = {
   id?: string
   name: string
   email: string
+  nidNumber: string
+  presentAddress: string
+  permanentAddress?: string | null
+  emergencyContact?: string | null
   contactNumber?: string | null
-  address?: string | null
   nidUrl?: string | null
   nidUrlPublicId?: string | null
   isDeleted?: boolean
   deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  nidNumber: string
-  presentAddress: string
-  permanentAddress?: string | null
-  emergencyContact?: string | null
   userId: string
-  agreementId: string
+  agreementId?: string | null
   payment?: Prisma.PaymentUncheckedCreateNestedOneWithoutTenantInput
 }
 
@@ -723,19 +699,18 @@ export type TenantUpdateWithoutAgreementInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  nidNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  presentAddress?: Prisma.StringFieldUpdateOperationsInput | string
+  permanentAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emergencyContact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nidUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nidUrlPublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  nidNumber?: Prisma.StringFieldUpdateOperationsInput | string
-  presentAddress?: Prisma.StringFieldUpdateOperationsInput | string
-  permanentAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  emergencyContact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  agreementId?: Prisma.StringFieldUpdateOperationsInput | string
+  agreementId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user?: Prisma.UserUpdateOneRequiredWithoutTenantNestedInput
   payment?: Prisma.PaymentUpdateOneWithoutTenantNestedInput
 }
@@ -744,20 +719,19 @@ export type TenantUncheckedUpdateWithoutAgreementInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  nidNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  presentAddress?: Prisma.StringFieldUpdateOperationsInput | string
+  permanentAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emergencyContact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nidUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nidUrlPublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  nidNumber?: Prisma.StringFieldUpdateOperationsInput | string
-  presentAddress?: Prisma.StringFieldUpdateOperationsInput | string
-  permanentAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  emergencyContact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userId?: Prisma.StringFieldUpdateOperationsInput | string
-  agreementId?: Prisma.StringFieldUpdateOperationsInput | string
+  agreementId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   payment?: Prisma.PaymentUncheckedUpdateOneWithoutTenantNestedInput
 }
 
@@ -765,19 +739,18 @@ export type TenantCreateWithoutPaymentInput = {
   id?: string
   name: string
   email: string
+  nidNumber: string
+  presentAddress: string
+  permanentAddress?: string | null
+  emergencyContact?: string | null
   contactNumber?: string | null
-  address?: string | null
   nidUrl?: string | null
   nidUrlPublicId?: string | null
   isDeleted?: boolean
   deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  nidNumber: string
-  presentAddress: string
-  permanentAddress?: string | null
-  emergencyContact?: string | null
-  agreementId: string
+  agreementId?: string | null
   user: Prisma.UserCreateNestedOneWithoutTenantInput
   agreement?: Prisma.AgreementCreateNestedOneWithoutTenantInput
 }
@@ -786,20 +759,19 @@ export type TenantUncheckedCreateWithoutPaymentInput = {
   id?: string
   name: string
   email: string
+  nidNumber: string
+  presentAddress: string
+  permanentAddress?: string | null
+  emergencyContact?: string | null
   contactNumber?: string | null
-  address?: string | null
   nidUrl?: string | null
   nidUrlPublicId?: string | null
   isDeleted?: boolean
   deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  nidNumber: string
-  presentAddress: string
-  permanentAddress?: string | null
-  emergencyContact?: string | null
   userId: string
-  agreementId: string
+  agreementId?: string | null
   agreement?: Prisma.AgreementUncheckedCreateNestedOneWithoutTenantInput
 }
 
@@ -823,19 +795,18 @@ export type TenantUpdateWithoutPaymentInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  nidNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  presentAddress?: Prisma.StringFieldUpdateOperationsInput | string
+  permanentAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emergencyContact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nidUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nidUrlPublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  nidNumber?: Prisma.StringFieldUpdateOperationsInput | string
-  presentAddress?: Prisma.StringFieldUpdateOperationsInput | string
-  permanentAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  emergencyContact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  agreementId?: Prisma.StringFieldUpdateOperationsInput | string
+  agreementId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user?: Prisma.UserUpdateOneRequiredWithoutTenantNestedInput
   agreement?: Prisma.AgreementUpdateOneWithoutTenantNestedInput
 }
@@ -844,20 +815,19 @@ export type TenantUncheckedUpdateWithoutPaymentInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  nidNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  presentAddress?: Prisma.StringFieldUpdateOperationsInput | string
+  permanentAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emergencyContact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nidUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nidUrlPublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  nidNumber?: Prisma.StringFieldUpdateOperationsInput | string
-  presentAddress?: Prisma.StringFieldUpdateOperationsInput | string
-  permanentAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  emergencyContact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userId?: Prisma.StringFieldUpdateOperationsInput | string
-  agreementId?: Prisma.StringFieldUpdateOperationsInput | string
+  agreementId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreement?: Prisma.AgreementUncheckedUpdateOneWithoutTenantNestedInput
 }
 
@@ -865,19 +835,18 @@ export type TenantCreateWithoutUserInput = {
   id?: string
   name: string
   email: string
+  nidNumber: string
+  presentAddress: string
+  permanentAddress?: string | null
+  emergencyContact?: string | null
   contactNumber?: string | null
-  address?: string | null
   nidUrl?: string | null
   nidUrlPublicId?: string | null
   isDeleted?: boolean
   deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  nidNumber: string
-  presentAddress: string
-  permanentAddress?: string | null
-  emergencyContact?: string | null
-  agreementId: string
+  agreementId?: string | null
   agreement?: Prisma.AgreementCreateNestedOneWithoutTenantInput
   payment?: Prisma.PaymentCreateNestedOneWithoutTenantInput
 }
@@ -886,19 +855,18 @@ export type TenantUncheckedCreateWithoutUserInput = {
   id?: string
   name: string
   email: string
+  nidNumber: string
+  presentAddress: string
+  permanentAddress?: string | null
+  emergencyContact?: string | null
   contactNumber?: string | null
-  address?: string | null
   nidUrl?: string | null
   nidUrlPublicId?: string | null
   isDeleted?: boolean
   deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  nidNumber: string
-  presentAddress: string
-  permanentAddress?: string | null
-  emergencyContact?: string | null
-  agreementId: string
+  agreementId?: string | null
   agreement?: Prisma.AgreementUncheckedCreateNestedOneWithoutTenantInput
   payment?: Prisma.PaymentUncheckedCreateNestedOneWithoutTenantInput
 }
@@ -923,19 +891,18 @@ export type TenantUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  nidNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  presentAddress?: Prisma.StringFieldUpdateOperationsInput | string
+  permanentAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emergencyContact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nidUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nidUrlPublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  nidNumber?: Prisma.StringFieldUpdateOperationsInput | string
-  presentAddress?: Prisma.StringFieldUpdateOperationsInput | string
-  permanentAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  emergencyContact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  agreementId?: Prisma.StringFieldUpdateOperationsInput | string
+  agreementId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreement?: Prisma.AgreementUpdateOneWithoutTenantNestedInput
   payment?: Prisma.PaymentUpdateOneWithoutTenantNestedInput
 }
@@ -944,19 +911,18 @@ export type TenantUncheckedUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  nidNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  presentAddress?: Prisma.StringFieldUpdateOperationsInput | string
+  permanentAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emergencyContact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nidUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nidUrlPublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  nidNumber?: Prisma.StringFieldUpdateOperationsInput | string
-  presentAddress?: Prisma.StringFieldUpdateOperationsInput | string
-  permanentAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  emergencyContact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  agreementId?: Prisma.StringFieldUpdateOperationsInput | string
+  agreementId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreement?: Prisma.AgreementUncheckedUpdateOneWithoutTenantNestedInput
   payment?: Prisma.PaymentUncheckedUpdateOneWithoutTenantNestedInput
 }
@@ -967,18 +933,17 @@ export type TenantSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   id?: boolean
   name?: boolean
   email?: boolean
+  nidNumber?: boolean
+  presentAddress?: boolean
+  permanentAddress?: boolean
+  emergencyContact?: boolean
   contactNumber?: boolean
-  address?: boolean
   nidUrl?: boolean
   nidUrlPublicId?: boolean
   isDeleted?: boolean
   deletedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  nidNumber?: boolean
-  presentAddress?: boolean
-  permanentAddress?: boolean
-  emergencyContact?: boolean
   userId?: boolean
   agreementId?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -990,18 +955,17 @@ export type TenantSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extens
   id?: boolean
   name?: boolean
   email?: boolean
+  nidNumber?: boolean
+  presentAddress?: boolean
+  permanentAddress?: boolean
+  emergencyContact?: boolean
   contactNumber?: boolean
-  address?: boolean
   nidUrl?: boolean
   nidUrlPublicId?: boolean
   isDeleted?: boolean
   deletedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  nidNumber?: boolean
-  presentAddress?: boolean
-  permanentAddress?: boolean
-  emergencyContact?: boolean
   userId?: boolean
   agreementId?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -1011,18 +975,17 @@ export type TenantSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
   id?: boolean
   name?: boolean
   email?: boolean
+  nidNumber?: boolean
+  presentAddress?: boolean
+  permanentAddress?: boolean
+  emergencyContact?: boolean
   contactNumber?: boolean
-  address?: boolean
   nidUrl?: boolean
   nidUrlPublicId?: boolean
   isDeleted?: boolean
   deletedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  nidNumber?: boolean
-  presentAddress?: boolean
-  permanentAddress?: boolean
-  emergencyContact?: boolean
   userId?: boolean
   agreementId?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -1032,23 +995,22 @@ export type TenantSelectScalar = {
   id?: boolean
   name?: boolean
   email?: boolean
+  nidNumber?: boolean
+  presentAddress?: boolean
+  permanentAddress?: boolean
+  emergencyContact?: boolean
   contactNumber?: boolean
-  address?: boolean
   nidUrl?: boolean
   nidUrlPublicId?: boolean
   isDeleted?: boolean
   deletedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  nidNumber?: boolean
-  presentAddress?: boolean
-  permanentAddress?: boolean
-  emergencyContact?: boolean
   userId?: boolean
   agreementId?: boolean
 }
 
-export type TenantOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "contactNumber" | "address" | "nidUrl" | "nidUrlPublicId" | "isDeleted" | "deletedAt" | "createdAt" | "updatedAt" | "nidNumber" | "presentAddress" | "permanentAddress" | "emergencyContact" | "userId" | "agreementId", ExtArgs["result"]["tenant"]>
+export type TenantOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "nidNumber" | "presentAddress" | "permanentAddress" | "emergencyContact" | "contactNumber" | "nidUrl" | "nidUrlPublicId" | "isDeleted" | "deletedAt" | "createdAt" | "updatedAt" | "userId" | "agreementId", ExtArgs["result"]["tenant"]>
 export type TenantInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   agreement?: boolean | Prisma.Tenant$agreementArgs<ExtArgs>
@@ -1072,20 +1034,19 @@ export type $TenantPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     id: string
     name: string
     email: string
+    nidNumber: string
+    presentAddress: string
+    permanentAddress: string | null
+    emergencyContact: string | null
     contactNumber: string | null
-    address: string | null
     nidUrl: string | null
     nidUrlPublicId: string | null
     isDeleted: boolean
     deletedAt: Date | null
     createdAt: Date
     updatedAt: Date
-    nidNumber: string
-    presentAddress: string
-    permanentAddress: string | null
-    emergencyContact: string | null
     userId: string
-    agreementId: string
+    agreementId: string | null
   }, ExtArgs["result"]["tenant"]>
   composites: {}
 }
@@ -1515,18 +1476,17 @@ export interface TenantFieldRefs {
   readonly id: Prisma.FieldRef<"Tenant", 'String'>
   readonly name: Prisma.FieldRef<"Tenant", 'String'>
   readonly email: Prisma.FieldRef<"Tenant", 'String'>
+  readonly nidNumber: Prisma.FieldRef<"Tenant", 'String'>
+  readonly presentAddress: Prisma.FieldRef<"Tenant", 'String'>
+  readonly permanentAddress: Prisma.FieldRef<"Tenant", 'String'>
+  readonly emergencyContact: Prisma.FieldRef<"Tenant", 'String'>
   readonly contactNumber: Prisma.FieldRef<"Tenant", 'String'>
-  readonly address: Prisma.FieldRef<"Tenant", 'String'>
   readonly nidUrl: Prisma.FieldRef<"Tenant", 'String'>
   readonly nidUrlPublicId: Prisma.FieldRef<"Tenant", 'String'>
   readonly isDeleted: Prisma.FieldRef<"Tenant", 'Boolean'>
   readonly deletedAt: Prisma.FieldRef<"Tenant", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"Tenant", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Tenant", 'DateTime'>
-  readonly nidNumber: Prisma.FieldRef<"Tenant", 'String'>
-  readonly presentAddress: Prisma.FieldRef<"Tenant", 'String'>
-  readonly permanentAddress: Prisma.FieldRef<"Tenant", 'String'>
-  readonly emergencyContact: Prisma.FieldRef<"Tenant", 'String'>
   readonly userId: Prisma.FieldRef<"Tenant", 'String'>
   readonly agreementId: Prisma.FieldRef<"Tenant", 'String'>
 }

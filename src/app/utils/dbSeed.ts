@@ -1,7 +1,7 @@
 import bcrypt from "bcryptjs";
 import { Role } from "../../generated/prisma/enums";
-import { prisma } from "../lib/prisma";
 import config from "../config";
+import { prisma } from "../lib/prisma";
 
 export const seedAdmin = async () => {
 	try {
@@ -99,24 +99,26 @@ export const seedSuperAdmin = async () => {
 	}
 };
 
-export const seedTestPatient = async () => {
+export const seedTestTenant = async () => {
 	try {
-		const isTestPatientExists = await prisma.user.findFirst({
+		const isTestTenantExists = await prisma.user.findFirst({
 			where: {
-				role: Role.PATIENT,
+				role: Role.TENANT,
 			},
 		});
 
-		if (isTestPatientExists) {
-			console.log("Test Patient Already Exists.");
+		if (isTestTenantExists) {
+			console.log("Test Tenant Already Exists.");
 			return;
 		}
-		const name = config.test_patient_name;
-		const email = config.test_patient_email;
-		const password = config.test_patient_password;
+		const name = config.test_tenant_name;
+		const email = config.test_tenant_email;
+		const password = config.test_tenant_password;
+		const presentAddress = config.test_tenant_address;
+		const nidNumber = config.test_tenant_nid;
 
 		if (!name || !email || !password) {
-			throw new Error("Test Patient Details Missing in .env file.");
+			throw new Error("Test Tenant Details Missing in .env file.");
 		}
 
 		const hashedPassword = await bcrypt.hash(
@@ -124,50 +126,50 @@ export const seedTestPatient = async () => {
 			Number(config.bcrypt_salt_rounds),
 		);
 
-		const testPatient = await prisma.user.create({
+		const testTenant = await prisma.user.create({
 			data: {
 				name,
 				email,
 				password: hashedPassword,
-				role: Role.PATIENT,
+				role: Role.TENANT,
 				needPasswordChange: false,
 				emailVerified: true,
-				patient: {
-					create: { name, email },
+				tenant: {
+					create: { name, email, nidNumber, presentAddress },
 				},
 			},
 		});
 
-		console.log("Test Patient Created: ", testPatient);
+		console.log("Test Tenant Created: ", testTenant);
 	} catch (error) {
-		console.log("Error Seeding Test Patient : ", error);
+		console.log("Error Seeding Test Tenant : ", error);
 
 		await prisma.user.delete({
 			where: {
-				email: config.test_patient_email,
+				email: config.test_tenant_email,
 			},
 		});
 	}
 };
 
-export const seedTestDoctor = async () => {
+export const seedTestOwner = async () => {
 	try {
-		const isTestDoctorExists = await prisma.user.findFirst({
+		const isTestOwnerExists = await prisma.user.findFirst({
 			where: {
-				role: Role.DOCTOR,
+				role: Role.OWNER,
 			},
 		});
 
-		if (isTestDoctorExists) {
-			console.log("Test Doctor Already Exists.");
+		if (isTestOwnerExists) {
+			console.log("Test Owner Already Exists.");
 			return;
 		}
-		const name = config.test_doctor_name;
-		const email = config.test_doctor_email;
-		const password = config.test_doctor_password;
+		const name = config.test_owner_name;
+		const email = config.test_owner_email;
+		const password = config.test_owner_password;
 
 		if (!name || !email || !password) {
-			throw new Error("Test Doctor Details Missing in .env file.");
+			throw new Error("Test Owner Details Missing in .env file.");
 		}
 
 		const hashedPassword = await bcrypt.hash(
@@ -175,24 +177,24 @@ export const seedTestDoctor = async () => {
 			Number(config.bcrypt_salt_rounds),
 		);
 
-		const testDoctor = await prisma.user.create({
+		const testOwner = await prisma.user.create({
 			data: {
 				name,
 				email,
 				password: hashedPassword,
-				role: Role.DOCTOR,
+				role: Role.OWNER,
 				needPasswordChange: false,
 				emailVerified: true,
 			},
 		});
 
-		console.log("Test Doctor Created: ", testDoctor);
+		console.log("Test Owner Created: ", testOwner);
 	} catch (error) {
-		console.log("Error Seeding Test Doctor : ", error);
+		console.log("Error Seeding Test Owner : ", error);
 
 		await prisma.user.delete({
 			where: {
-				email: config.test_doctor_email,
+				email: config.test_owner_email,
 			},
 		});
 	}
