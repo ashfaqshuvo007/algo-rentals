@@ -52,6 +52,7 @@ export const AnyNull = runtime.AnyNull
 
 export const ModelName = {
   Agreement: 'Agreement',
+  Owner: 'Owner',
   Payment: 'Payment',
   Property: 'Property',
   Tenant: 'Tenant',
@@ -93,6 +94,21 @@ export const AgreementScalarFieldEnum = {
 export type AgreementScalarFieldEnum = (typeof AgreementScalarFieldEnum)[keyof typeof AgreementScalarFieldEnum]
 
 
+export const OwnerScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  email: 'email',
+  isDeleted: 'isDeleted',
+  deletedAt: 'deletedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  userId: 'userId',
+  propertyId: 'propertyId'
+} as const
+
+export type OwnerScalarFieldEnum = (typeof OwnerScalarFieldEnum)[keyof typeof OwnerScalarFieldEnum]
+
+
 export const PaymentScalarFieldEnum = {
   id: 'id',
   tenantProfileId: 'tenantProfileId',
@@ -114,7 +130,9 @@ export const PropertyScalarFieldEnum = {
   id: 'id',
   name: 'name',
   address: 'address',
-  createdAt: 'createdAt'
+  ownerId: 'ownerId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 } as const
 
 export type PropertyScalarFieldEnum = (typeof PropertyScalarFieldEnum)[keyof typeof PropertyScalarFieldEnum]
@@ -136,7 +154,8 @@ export const TenantScalarFieldEnum = {
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   userId: 'userId',
-  agreementId: 'agreementId'
+  agreementId: 'agreementId',
+  propertyId: 'propertyId'
 } as const
 
 export type TenantScalarFieldEnum = (typeof TenantScalarFieldEnum)[keyof typeof TenantScalarFieldEnum]

@@ -167,6 +167,7 @@ const getMe = async (user: IRequestUser) => {
 		},
 		include: {
 			tenant: true,
+			owner: true,
 		},
 		omit: {
 			password: true,

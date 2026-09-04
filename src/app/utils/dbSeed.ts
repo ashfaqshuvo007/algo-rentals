@@ -185,6 +185,12 @@ export const seedTestOwner = async () => {
 				role: Role.OWNER,
 				needPasswordChange: false,
 				emailVerified: true,
+				owner: {
+					create: {
+						name,
+						email,
+					},
+				},
 			},
 		});
 

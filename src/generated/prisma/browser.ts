@@ -23,6 +23,11 @@ export * from './enums';
  */
 export type Agreement = Prisma.AgreementModel
 /**
+ * Model Owner
+ * 
+ */
+export type Owner = Prisma.OwnerModel
+/**
  * Model Payment
  * 
  */

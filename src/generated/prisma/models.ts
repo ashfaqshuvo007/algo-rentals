@@ -9,6 +9,7 @@
  * 🟢 You can import this file directly.
  */
 export type * from './models/Agreement'
+export type * from './models/Owner'
 export type * from './models/Payment'
 export type * from './models/Property'
 export type * from './models/Tenant'
