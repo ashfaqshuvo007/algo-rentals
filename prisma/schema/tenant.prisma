@@ -1,27 +1,30 @@
 model Tenant {
-    id  String @id @default(uuid())
+  id String @id @default(uuid())
 
-    name            String
-    email           String    @unique
-    contactNumber   String?
-    address         String?
-    nidUrl          String? 
-    nidUrlPublicId  String?
-    isDeleted       Boolean   @default(false)
-    deletedAt       DateTime?
-    createdAt       DateTime  @default(now())
-    updatedAt       DateTime  @updatedAt
+  name             String
+  email            String    @unique
+  contactNumber    String?
+  address          String?
+  nidUrl           String?
+  nidUrlPublicId   String?
+  isDeleted        Boolean   @default(false)
+  deletedAt        DateTime?
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+  nidNumber        String    @unique
+  presentAddress   String
+  permanentAddress String?
+  emergencyContact String?
+  //relations
+  userId           String    @unique
+  user             User      @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 
-    //relations
-    userId String @unique
-    user   User   @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  agreementId String     @unique
+  agreement   Agreement?
 
-    agreementId String @unique
-    agreement Agreement?
+  payment Payment?
 
-    payments          Payment[]
-
-    @@index([email], name: "idx_tenant_email")
-    @@index([isDeleted], name: "idx_tenant_isDeleted")
-    @@map("tenants")
+  @@index([email], name: "idx_tenant_email")
+  @@index([isDeleted], name: "idx_tenant_isDeleted")
+  @@map("tenants")
 }

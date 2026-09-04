@@ -1,19 +1,19 @@
 model Agreement {
-    id                    String          @id @default(uuid())
-    tenantProfileId       String          @unique
-    tenant                Tenant   @relation(fields: [tenantProfileId], references: [id])
-    unitId                String
-    unit                  Unit            @relation(fields: [unitId], references: [id])
-    status                AgreementStatus @default(DRAFT)
-    startDate             DateTime
-    endDate               DateTime?
-    monthlyRent           Decimal
-    securityDepositAmount Decimal
-    activatedAt           DateTime?
-    terminatedAt          DateTime?
-    payments              Payment[]
-    createdAt             DateTime        @default(now())
-    updatedAt             DateTime        @updatedAt
+  id                    String          @id @default(uuid())
+  tenantProfileId       String          @unique
+  tenant                Tenant          @relation(fields: [tenantProfileId], references: [id])
+  unitId                String
+  unit                  Unit            @relation(fields: [unitId], references: [id])
+  status                AgreementStatus @default(DRAFT)
+  startDate             DateTime
+  endDate               DateTime?
+  monthlyRent           Decimal
+  securityDepositAmount Decimal
+  activatedAt           DateTime?
+  terminatedAt          DateTime?
+  payments              Payment[]
+  createdAt             DateTime        @default(now())
+  updatedAt             DateTime        @updatedAt
 
-    @@index([status])
+  @@index([status])
 }

@@ -1,22 +1,22 @@
 model Unit {
-  id                    String     @id @default(uuid())
+  id                    String      @id @default(uuid())
   propertyId            String
-  property              Property   @relation(fields: [propertyId], references: [id])
+  property              Property    @relation(fields: [propertyId], references: [id])
   unitNo                String
   type                  UnitType
   floor                 Int?
   lengthFt              Float?
   widthFt               Float?
-  occupancyLimit        Int?       // rooms only; null/ignored for shops
+  occupancyLimit        Int? // rooms only; null/ignored for shops
   monthlyRent           Decimal
   securityDepositAmount Decimal
-  status                UnitStatus @default(VACANT)
+  status                UnitStatus  @default(VACANT)
   agreements            Agreement[]
 
-  pictureUrl            String?
-  picturePublicId       String?
-  createdAt             DateTime   @default(now())
-  updatedAt             DateTime   @updatedAt
+  pictureUrl      String?
+  picturePublicId String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
 
   @@unique([propertyId, unitNo])
   @@index([status])

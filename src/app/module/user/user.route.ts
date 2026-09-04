@@ -8,7 +8,7 @@ const router = Router();
 
 router.patch(
 	"/profile-image",
-	auth(Role.ADMIN, Role.SUPER_ADMIN, Role.DOCTOR, Role.PATIENT),
+	auth(Role.ADMIN, Role.ADMIN, Role.OWNER, Role.TENANT),
 	upload.single("profileImage"),
 	UserController.uploadProfileImage,
 );
