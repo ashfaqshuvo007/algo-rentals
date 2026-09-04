@@ -5,12 +5,14 @@ export interface ILoginUserPayload {
 	password: string;
 }
 
-export interface IRegisterPatientPayload {
+export interface IRegisterTenantPayload {
 	name: string;
 	email: string;
 	password: string;
-	patient?: {
+	tenant?: {
+		nidNumber?: string;
 		contactNumber?: string;
+		presentAddress?: string;
 	};
 }
 

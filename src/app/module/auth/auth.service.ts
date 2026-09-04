@@ -21,14 +21,14 @@ import type {
 	IForgotPasswordPayload,
 	IGoogleLoginPayload,
 	ILoginUserPayload,
-	IRegisterPatientPayload,
+	IRegisterTenantPayload,
 	IRequestUser,
 	IResetPasswordPayload,
 	IVerfiyUserEmailPayload,
 } from "./auth.interface";
 
-const registerPatient = async (payload: IRegisterPatientPayload) => {
-	const { name, password, patient: patientData } = payload;
+const registerTenant = async (payload: IRegisterTenantPayload) => {
+	const { name, password, tenant: tenantData } = payload;
 	const email = payload.email.trim().toLowerCase();
 
 	const isUserExists = await prisma.user.findUnique({
@@ -47,7 +47,7 @@ const registerPatient = async (payload: IRegisterPatientPayload) => {
 	// Store User Data in Redis
 
 	const otp = crypto.randomInt(100000, 1000000).toString();
-	const otpKey = `patient-registration-otp:${email}`;
+	const otpKey = `tenant-registration-otp:${email}`;
 	await redisClient.set(otpKey, otp, {
 		expiration: {
 			type: "EX",
@@ -55,15 +55,16 @@ const registerPatient = async (payload: IRegisterPatientPayload) => {
 		},
 	});
 
-	const patientRegistrationKey = `patient-registration-data:${email}`;
+	const tenantRegistrationKey = `tenant-registration-data:${email}`;
 	const redisUserDataPayload = {
 		name,
 		email,
 		password: hashedPassword,
-		patient: patientData,
+		tenant: tenantData,
 	};
+
 	await redisClient.set(
-		patientRegistrationKey,
+		tenantRegistrationKey,
 		JSON.stringify(redisUserDataPayload),
 		{
 			expiration: {
@@ -165,7 +166,7 @@ const getMe = async (user: IRequestUser) => {
 			id: user.userId,
 		},
 		include: {
-			patient: true,
+			tenant: true,
 		},
 		omit: {
 			password: true,
@@ -228,7 +229,7 @@ const refreshToken = async (token: string) => {
 	};
 };
 
-const gogleAuth = async (payload: IGoogleLoginPayload) => {
+const googleAuth = async (payload: IGoogleLoginPayload) => {
 	let googleIdTokenPayload: TokenPayload | null | undefined = null;
 
 	// Get User details from google
@@ -257,45 +258,45 @@ const gogleAuth = async (payload: IGoogleLoginPayload) => {
 	}
 
 	// User details from google SUCCESS
-	const ifPAtientExistsWithGoogleAuth = await prisma.user.findUnique({
+	const ifTenantExistsWithGoogleAuth = await prisma.user.findUnique({
 		where: {
 			email: googleIdTokenPayload.email,
-			role: Role.PATIENT,
+			role: Role.TENANT,
 			googleId: googleIdTokenPayload.sub,
 		},
 	});
 
-	let user = ifPAtientExistsWithGoogleAuth;
+	let user = ifTenantExistsWithGoogleAuth;
 
-	if (!ifPAtientExistsWithGoogleAuth) {
-		const ifPatientExistWithCredentials = await prisma.user.findUnique({
+	if (!ifTenantExistsWithGoogleAuth) {
+		const ifTenantExistWithCredentials = await prisma.user.findUnique({
 			where: {
 				email: googleIdTokenPayload.email,
-				role: Role.PATIENT,
+				role: Role.TENANT,
 				authProvider: AuthProvider.CREDENTIAL,
 			},
 		});
 
 		// A credential based user tries Google Auth
-		if (ifPatientExistWithCredentials) {
-			if (!ifPatientExistWithCredentials.emailVerified) {
+		if (ifTenantExistWithCredentials) {
+			if (!ifTenantExistWithCredentials.emailVerified) {
 				throw new Error("User Email Not Verified");
 			}
 
-			if (ifPatientExistWithCredentials.status === UserStatus.BLOCKED) {
+			if (ifTenantExistWithCredentials.status === UserStatus.BLOCKED) {
 				throw new Error("User Is Blocked");
 			}
 
 			if (
-				ifPatientExistWithCredentials.isDeleted ||
-				ifPatientExistWithCredentials.status === UserStatus.DELETED
+				ifTenantExistWithCredentials.isDeleted ||
+				ifTenantExistWithCredentials.status === UserStatus.DELETED
 			) {
 				throw new Error("User Is Deleted");
 			}
 
 			user = await prisma.user.update({
 				where: {
-					id: ifPatientExistWithCredentials.id,
+					id: ifTenantExistWithCredentials.id,
 				},
 				data: {
 					googleId: googleIdTokenPayload.sub,
@@ -307,11 +308,11 @@ const gogleAuth = async (payload: IGoogleLoginPayload) => {
 				data: {
 					email: googleIdTokenPayload.email,
 					name: googleIdTokenPayload.name,
-					role: Role.PATIENT,
+					role: Role.TENANT,
 					googleId: googleIdTokenPayload.sub,
 					authProvider: AuthProvider.GOOGLE,
 					emailVerified: true,
-					patient: {
+					tenant: {
 						create: {
 							name: googleIdTokenPayload.name,
 							email: googleIdTokenPayload.email,
@@ -516,7 +517,7 @@ const verifyUserEmail = async (payload: IVerfiyUserEmailPayload) => {
 		throw new Error("User Account Is Deleted.");
 	}
 
-	const otpKey = `patient-registration-otp:${email}`;
+	const otpKey = `tenant-registration-otp:${email}`;
 	const redisOtp = await redisClient.get(otpKey);
 
 	if (!redisOtp) {
@@ -528,31 +529,33 @@ const verifyUserEmail = async (payload: IVerfiyUserEmailPayload) => {
 	}
 	await redisClient.del(otpKey);
 
-	const patientRegistrationKey = `patient-registration-data:${email}`;
-	const redisPatientData = await redisClient.get(patientRegistrationKey);
-	if (!redisPatientData) {
-		throw new Error("Patient does not exist.");
+	const tenantRegistrationKey = `tenant-registration-data:${email}`;
+	const redisTenantData = await redisClient.get(tenantRegistrationKey);
+	if (!redisTenantData) {
+		throw new Error("Tenant does not exist.");
 	}
-	const patientPayload: IRegisterPatientPayload = JSON.parse(redisPatientData);
+	const tenantPayload: IRegisterTenantPayload = JSON.parse(redisTenantData);
 	// Store user in DB
 	const createdUser = await prisma.user.create({
 		data: {
-			name: patientPayload.name,
-			email: patientPayload.email,
-			password: patientPayload.password,
-			role: Role.PATIENT,
+			name: tenantPayload.name,
+			email: tenantPayload.email,
+			password: tenantPayload.password,
+			role: Role.TENANT,
 			status: UserStatus.ACTIVE,
 			emailVerified: true,
-			patient: {
+			tenant: {
 				create: {
-					name: patientPayload.name,
-					email: patientPayload.email,
-					contactNumber: patientPayload.patient?.contactNumber || "",
+					name: tenantPayload.name,
+					email: tenantPayload.email,
+					contactNumber: tenantPayload.tenant?.contactNumber || "",
+					nidNumber: tenantPayload.tenant?.nidNumber || "",
+					presentAddress: tenantPayload.tenant?.presentAddress || "",
 				},
 			},
 		},
 		omit: { password: true },
-		include: { patient: true },
+		include: { tenant: true },
 	});
 
 	// Send Welcome Email
@@ -568,7 +571,7 @@ const verifyUserEmail = async (payload: IVerfiyUserEmailPayload) => {
 		{
 			from: config.email_sender,
 			to: email,
-			subject: "Welcome to Algo E-Health System",
+			subject: "Welcome to Algo Rental Property System",
 			html: html,
 		},
 		(error, info) => {
@@ -579,9 +582,9 @@ const verifyUserEmail = async (payload: IVerfiyUserEmailPayload) => {
 		},
 	);
 
-	await redisClient.del(patientRegistrationKey);
+	await redisClient.del(tenantRegistrationKey);
 
-	const { patient, ...user } = createdUser;
+	const { tenant, ...user } = createdUser;
 	const jwtPayload = {
 		userId: user.id,
 		name: user.name,
@@ -603,18 +606,18 @@ const verifyUserEmail = async (payload: IVerfiyUserEmailPayload) => {
 
 	return {
 		user,
-		patient,
+		tenant,
 		accessToken,
 		refreshToken,
 	};
 };
 
 export const AuthService = {
-	registerPatient,
+	registerTenant,
 	loginUser,
 	getMe,
 	refreshToken,
-	gogleAuth,
+	googleAuth,
 	forgotPassword,
 	resetPassword,
 	verifyUserEmail,

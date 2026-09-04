@@ -61,6 +61,67 @@ const uploadProfileImage = async (fileToUpload: Buffer, userId: string) => {
 	return updatedUser;
 };
 
-export const UserService = {
+const uploadNid = async (fileToUpload: Buffer, userId: string, nId: string) => {
+	// Get the existing user to check for an old nid file
+	const existingTenant = await prisma.tenant.findUnique({
+		where: { userId: userId },
+		select: { nidUrlPublicId: true },
+	});
+
+	// Wait for Cloudinary upload to complete
+	const cloudinaryResult = await new Promise<UploadApiResponse>(
+		(resolve, reject) => {
+			cloudinary.uploader
+				.upload_stream(
+					{
+						resource_type: "image",
+					},
+					(error, result) => {
+						if (error) {
+							console.log(error);
+							reject(new Error(error.message));
+							return;
+						}
+						if (!result) {
+							reject(new Error("No Result From Cloudinary."));
+							return;
+						}
+						resolve(result);
+					},
+				)
+				.end(fileToUpload);
+		},
+	);
+
+	// Update DB with new  info
+	const updatedTenant = await prisma.tenant.update({
+		where: {
+			userId: userId,
+		},
+		data: {
+			nidNumber: nId,
+			nidUrl: cloudinaryResult.secure_url,
+			nidUrlPublicId: cloudinaryResult.public_id,
+		},
+		omit: {
+			nidNumber: true,
+		},
+	});
+
+	// Delete old image from Cloudinary, if it existed
+	if (existingTenant?.nidUrlPublicId) {
+		try {
+			await cloudinary.uploader.destroy(existingTenant.nidUrlPublicId);
+		} catch (destroyError) {
+			// Log but don't fail the whole operation — new image is already saved
+			console.log("Failed to delete old Cloudinary file:", destroyError);
+		}
+	}
+
+	return updatedTenant;
+};
+
+export const TenantService = {
 	uploadProfileImage,
+	uploadNid,
 };

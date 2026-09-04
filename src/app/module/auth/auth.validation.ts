@@ -1,6 +1,6 @@
 import z from "zod";
 
-const PatientLoginZodSchema = z.object({
+const TenantLoginZodSchema = z.object({
 	email: z.email(),
 	password: z
 		.string()
@@ -18,7 +18,7 @@ const PatientLoginZodSchema = z.object({
 		}),
 });
 
-const PatientRegistrationZodSchema = z.object({
+const TenantRegistrationZodSchema = z.object({
 	name: z
 		.string("Name should be a string")
 		.min(3, "Name must be atleast 3 Chars long")
@@ -38,9 +38,21 @@ const PatientRegistrationZodSchema = z.object({
 		.regex(/[^A-Za-z0-9]/, {
 			message: "Password must contain at least one special character",
 		}),
-	patient: z
+	tenant: z
 		.object({
-			contactNumber: z.string().optional(),
+			contactNumber: z
+				.string()
+				.regex(/^\d{11}$/, {
+					message: "Contact number must be exactly 11 digits",
+				})
+				.optional(),
+			nidNumber: z
+				.string()
+				.regex(/^\d{10}$/, {
+					message: "NID number must be exactly 10 digits",
+				})
+				.optional(),
+			presentAddress: z.string().optional(),
 		})
 		.optional(),
 });
@@ -74,8 +86,8 @@ const UserEmailVerificationZodSchema = z.object({
 });
 
 export const UserValidation = {
-	PatientRegistrationZodSchema,
-	PatientLoginZodSchema,
+	TenantRegistrationZodSchema,
+	TenantLoginZodSchema,
 	ForgotPasswordZodSchema,
 	ResetPasswordZodSchema,
 	UserEmailVerificationZodSchema,

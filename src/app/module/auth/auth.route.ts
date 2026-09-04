@@ -9,21 +9,21 @@ const router = Router();
 
 router.post(
 	"/register",
-	zodValidation(UserValidation.PatientRegistrationZodSchema),
-	AuthController.registerPatient,
+	zodValidation(UserValidation.TenantRegistrationZodSchema),
+	AuthController.registerTenant,
 );
 router.post(
 	"/login",
-	zodValidation(UserValidation.PatientLoginZodSchema),
+	zodValidation(UserValidation.TenantLoginZodSchema),
 	AuthController.loginUser,
 );
 router.get(
 	"/me",
-	auth(Role.ADMIN, Role.DOCTOR, Role.PATIENT, Role.SUPER_ADMIN),
+	auth(Role.ADMIN, Role.OWNER, Role.TENANT, Role.SUPER_ADMIN),
 	AuthController.getMe,
 );
 router.post("/refresh-token", AuthController.refreshToken);
-router.post("/google", AuthController.gooleAuth);
+router.post("/google", AuthController.googleAuth);
 router.post(
 	"/forgot-password",
 	zodValidation(UserValidation.ForgotPasswordZodSchema),
