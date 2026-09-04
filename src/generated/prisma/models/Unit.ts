@@ -46,7 +46,6 @@ export type UnitSumAggregateOutputType = {
 
 export type UnitMinAggregateOutputType = {
   id: string | null
-  propertyId: string | null
   unitNo: string | null
   type: $Enums.UnitType | null
   floor: number | null
@@ -56,6 +55,7 @@ export type UnitMinAggregateOutputType = {
   monthlyRent: runtime.Decimal | null
   securityDepositAmount: runtime.Decimal | null
   status: $Enums.UnitStatus | null
+  propertyId: string | null
   pictureUrl: string | null
   picturePublicId: string | null
   createdAt: Date | null
@@ -64,7 +64,6 @@ export type UnitMinAggregateOutputType = {
 
 export type UnitMaxAggregateOutputType = {
   id: string | null
-  propertyId: string | null
   unitNo: string | null
   type: $Enums.UnitType | null
   floor: number | null
@@ -74,6 +73,7 @@ export type UnitMaxAggregateOutputType = {
   monthlyRent: runtime.Decimal | null
   securityDepositAmount: runtime.Decimal | null
   status: $Enums.UnitStatus | null
+  propertyId: string | null
   pictureUrl: string | null
   picturePublicId: string | null
   createdAt: Date | null
@@ -82,7 +82,6 @@ export type UnitMaxAggregateOutputType = {
 
 export type UnitCountAggregateOutputType = {
   id: number
-  propertyId: number
   unitNo: number
   type: number
   floor: number
@@ -92,6 +91,7 @@ export type UnitCountAggregateOutputType = {
   monthlyRent: number
   securityDepositAmount: number
   status: number
+  propertyId: number
   pictureUrl: number
   picturePublicId: number
   createdAt: number
@@ -120,7 +120,6 @@ export type UnitSumAggregateInputType = {
 
 export type UnitMinAggregateInputType = {
   id?: true
-  propertyId?: true
   unitNo?: true
   type?: true
   floor?: true
@@ -130,6 +129,7 @@ export type UnitMinAggregateInputType = {
   monthlyRent?: true
   securityDepositAmount?: true
   status?: true
+  propertyId?: true
   pictureUrl?: true
   picturePublicId?: true
   createdAt?: true
@@ -138,7 +138,6 @@ export type UnitMinAggregateInputType = {
 
 export type UnitMaxAggregateInputType = {
   id?: true
-  propertyId?: true
   unitNo?: true
   type?: true
   floor?: true
@@ -148,6 +147,7 @@ export type UnitMaxAggregateInputType = {
   monthlyRent?: true
   securityDepositAmount?: true
   status?: true
+  propertyId?: true
   pictureUrl?: true
   picturePublicId?: true
   createdAt?: true
@@ -156,7 +156,6 @@ export type UnitMaxAggregateInputType = {
 
 export type UnitCountAggregateInputType = {
   id?: true
-  propertyId?: true
   unitNo?: true
   type?: true
   floor?: true
@@ -166,6 +165,7 @@ export type UnitCountAggregateInputType = {
   monthlyRent?: true
   securityDepositAmount?: true
   status?: true
+  propertyId?: true
   pictureUrl?: true
   picturePublicId?: true
   createdAt?: true
@@ -261,7 +261,6 @@ export type UnitGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
 
 export type UnitGroupByOutputType = {
   id: string
-  propertyId: string
   unitNo: string
   type: $Enums.UnitType
   floor: number | null
@@ -271,6 +270,7 @@ export type UnitGroupByOutputType = {
   monthlyRent: runtime.Decimal
   securityDepositAmount: runtime.Decimal
   status: $Enums.UnitStatus
+  propertyId: string
   pictureUrl: string | null
   picturePublicId: string | null
   createdAt: Date
@@ -302,7 +302,6 @@ export type UnitWhereInput = {
   OR?: Prisma.UnitWhereInput[]
   NOT?: Prisma.UnitWhereInput | Prisma.UnitWhereInput[]
   id?: Prisma.StringFilter<"Unit"> | string
-  propertyId?: Prisma.StringFilter<"Unit"> | string
   unitNo?: Prisma.StringFilter<"Unit"> | string
   type?: Prisma.EnumUnitTypeFilter<"Unit"> | $Enums.UnitType
   floor?: Prisma.IntNullableFilter<"Unit"> | number | null
@@ -312,17 +311,18 @@ export type UnitWhereInput = {
   monthlyRent?: Prisma.DecimalFilter<"Unit"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   securityDepositAmount?: Prisma.DecimalFilter<"Unit"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumUnitStatusFilter<"Unit"> | $Enums.UnitStatus
+  propertyId?: Prisma.StringFilter<"Unit"> | string
   pictureUrl?: Prisma.StringNullableFilter<"Unit"> | string | null
   picturePublicId?: Prisma.StringNullableFilter<"Unit"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Unit"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Unit"> | Date | string
-  property?: Prisma.XOR<Prisma.PropertyScalarRelationFilter, Prisma.PropertyWhereInput>
   agreements?: Prisma.AgreementListRelationFilter
+  tenants?: Prisma.TenantListRelationFilter
+  property?: Prisma.XOR<Prisma.PropertyScalarRelationFilter, Prisma.PropertyWhereInput>
 }
 
 export type UnitOrderByWithRelationInput = {
   id?: Prisma.SortOrder
-  propertyId?: Prisma.SortOrder
   unitNo?: Prisma.SortOrder
   type?: Prisma.SortOrder
   floor?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -332,12 +332,14 @@ export type UnitOrderByWithRelationInput = {
   monthlyRent?: Prisma.SortOrder
   securityDepositAmount?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  propertyId?: Prisma.SortOrder
   pictureUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   picturePublicId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  property?: Prisma.PropertyOrderByWithRelationInput
   agreements?: Prisma.AgreementOrderByRelationAggregateInput
+  tenants?: Prisma.TenantOrderByRelationAggregateInput
+  property?: Prisma.PropertyOrderByWithRelationInput
 }
 
 export type UnitWhereUniqueInput = Prisma.AtLeast<{
@@ -346,7 +348,6 @@ export type UnitWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.UnitWhereInput | Prisma.UnitWhereInput[]
   OR?: Prisma.UnitWhereInput[]
   NOT?: Prisma.UnitWhereInput | Prisma.UnitWhereInput[]
-  propertyId?: Prisma.StringFilter<"Unit"> | string
   unitNo?: Prisma.StringFilter<"Unit"> | string
   type?: Prisma.EnumUnitTypeFilter<"Unit"> | $Enums.UnitType
   floor?: Prisma.IntNullableFilter<"Unit"> | number | null
@@ -356,17 +357,18 @@ export type UnitWhereUniqueInput = Prisma.AtLeast<{
   monthlyRent?: Prisma.DecimalFilter<"Unit"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   securityDepositAmount?: Prisma.DecimalFilter<"Unit"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumUnitStatusFilter<"Unit"> | $Enums.UnitStatus
+  propertyId?: Prisma.StringFilter<"Unit"> | string
   pictureUrl?: Prisma.StringNullableFilter<"Unit"> | string | null
   picturePublicId?: Prisma.StringNullableFilter<"Unit"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Unit"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Unit"> | Date | string
-  property?: Prisma.XOR<Prisma.PropertyScalarRelationFilter, Prisma.PropertyWhereInput>
   agreements?: Prisma.AgreementListRelationFilter
+  tenants?: Prisma.TenantListRelationFilter
+  property?: Prisma.XOR<Prisma.PropertyScalarRelationFilter, Prisma.PropertyWhereInput>
 }, "id" | "propertyId_unitNo">
 
 export type UnitOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
-  propertyId?: Prisma.SortOrder
   unitNo?: Prisma.SortOrder
   type?: Prisma.SortOrder
   floor?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -376,6 +378,7 @@ export type UnitOrderByWithAggregationInput = {
   monthlyRent?: Prisma.SortOrder
   securityDepositAmount?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  propertyId?: Prisma.SortOrder
   pictureUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   picturePublicId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -392,7 +395,6 @@ export type UnitScalarWhereWithAggregatesInput = {
   OR?: Prisma.UnitScalarWhereWithAggregatesInput[]
   NOT?: Prisma.UnitScalarWhereWithAggregatesInput | Prisma.UnitScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Unit"> | string
-  propertyId?: Prisma.StringWithAggregatesFilter<"Unit"> | string
   unitNo?: Prisma.StringWithAggregatesFilter<"Unit"> | string
   type?: Prisma.EnumUnitTypeWithAggregatesFilter<"Unit"> | $Enums.UnitType
   floor?: Prisma.IntNullableWithAggregatesFilter<"Unit"> | number | null
@@ -402,6 +404,7 @@ export type UnitScalarWhereWithAggregatesInput = {
   monthlyRent?: Prisma.DecimalWithAggregatesFilter<"Unit"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   securityDepositAmount?: Prisma.DecimalWithAggregatesFilter<"Unit"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumUnitStatusWithAggregatesFilter<"Unit"> | $Enums.UnitStatus
+  propertyId?: Prisma.StringWithAggregatesFilter<"Unit"> | string
   pictureUrl?: Prisma.StringNullableWithAggregatesFilter<"Unit"> | string | null
   picturePublicId?: Prisma.StringNullableWithAggregatesFilter<"Unit"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Unit"> | Date | string
@@ -423,13 +426,13 @@ export type UnitCreateInput = {
   picturePublicId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  property: Prisma.PropertyCreateNestedOneWithoutUnitsInput
   agreements?: Prisma.AgreementCreateNestedManyWithoutUnitInput
+  tenants?: Prisma.TenantCreateNestedManyWithoutUnitInput
+  property: Prisma.PropertyCreateNestedOneWithoutUnitsInput
 }
 
 export type UnitUncheckedCreateInput = {
   id?: string
-  propertyId: string
   unitNo: string
   type: $Enums.UnitType
   floor?: number | null
@@ -439,11 +442,13 @@ export type UnitUncheckedCreateInput = {
   monthlyRent: runtime.Decimal | runtime.DecimalJsLike | number | string
   securityDepositAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.UnitStatus
+  propertyId: string
   pictureUrl?: string | null
   picturePublicId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   agreements?: Prisma.AgreementUncheckedCreateNestedManyWithoutUnitInput
+  tenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUnitInput
 }
 
 export type UnitUpdateInput = {
@@ -461,13 +466,13 @@ export type UnitUpdateInput = {
   picturePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  property?: Prisma.PropertyUpdateOneRequiredWithoutUnitsNestedInput
   agreements?: Prisma.AgreementUpdateManyWithoutUnitNestedInput
+  tenants?: Prisma.TenantUpdateManyWithoutUnitNestedInput
+  property?: Prisma.PropertyUpdateOneRequiredWithoutUnitsNestedInput
 }
 
 export type UnitUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  propertyId?: Prisma.StringFieldUpdateOperationsInput | string
   unitNo?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
   floor?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -477,16 +482,17 @@ export type UnitUncheckedUpdateInput = {
   monthlyRent?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   securityDepositAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumUnitStatusFieldUpdateOperationsInput | $Enums.UnitStatus
+  propertyId?: Prisma.StringFieldUpdateOperationsInput | string
   pictureUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   picturePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   agreements?: Prisma.AgreementUncheckedUpdateManyWithoutUnitNestedInput
+  tenants?: Prisma.TenantUncheckedUpdateManyWithoutUnitNestedInput
 }
 
 export type UnitCreateManyInput = {
   id?: string
-  propertyId: string
   unitNo: string
   type: $Enums.UnitType
   floor?: number | null
@@ -496,6 +502,7 @@ export type UnitCreateManyInput = {
   monthlyRent: runtime.Decimal | runtime.DecimalJsLike | number | string
   securityDepositAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.UnitStatus
+  propertyId: string
   pictureUrl?: string | null
   picturePublicId?: string | null
   createdAt?: Date | string
@@ -521,7 +528,6 @@ export type UnitUpdateManyMutationInput = {
 
 export type UnitUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  propertyId?: Prisma.StringFieldUpdateOperationsInput | string
   unitNo?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
   floor?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -531,6 +537,7 @@ export type UnitUncheckedUpdateManyInput = {
   monthlyRent?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   securityDepositAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumUnitStatusFieldUpdateOperationsInput | $Enums.UnitStatus
+  propertyId?: Prisma.StringFieldUpdateOperationsInput | string
   pictureUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   picturePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -552,6 +559,11 @@ export type UnitOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
+export type UnitNullableScalarRelationFilter = {
+  is?: Prisma.UnitWhereInput | null
+  isNot?: Prisma.UnitWhereInput | null
+}
+
 export type UnitPropertyIdUnitNoCompoundUniqueInput = {
   propertyId: string
   unitNo: string
@@ -559,7 +571,6 @@ export type UnitPropertyIdUnitNoCompoundUniqueInput = {
 
 export type UnitCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  propertyId?: Prisma.SortOrder
   unitNo?: Prisma.SortOrder
   type?: Prisma.SortOrder
   floor?: Prisma.SortOrder
@@ -569,6 +580,7 @@ export type UnitCountOrderByAggregateInput = {
   monthlyRent?: Prisma.SortOrder
   securityDepositAmount?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  propertyId?: Prisma.SortOrder
   pictureUrl?: Prisma.SortOrder
   picturePublicId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -586,7 +598,6 @@ export type UnitAvgOrderByAggregateInput = {
 
 export type UnitMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  propertyId?: Prisma.SortOrder
   unitNo?: Prisma.SortOrder
   type?: Prisma.SortOrder
   floor?: Prisma.SortOrder
@@ -596,6 +607,7 @@ export type UnitMaxOrderByAggregateInput = {
   monthlyRent?: Prisma.SortOrder
   securityDepositAmount?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  propertyId?: Prisma.SortOrder
   pictureUrl?: Prisma.SortOrder
   picturePublicId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -604,7 +616,6 @@ export type UnitMaxOrderByAggregateInput = {
 
 export type UnitMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  propertyId?: Prisma.SortOrder
   unitNo?: Prisma.SortOrder
   type?: Prisma.SortOrder
   floor?: Prisma.SortOrder
@@ -614,6 +625,7 @@ export type UnitMinOrderByAggregateInput = {
   monthlyRent?: Prisma.SortOrder
   securityDepositAmount?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  propertyId?: Prisma.SortOrder
   pictureUrl?: Prisma.SortOrder
   picturePublicId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -685,6 +697,22 @@ export type UnitUncheckedUpdateManyWithoutPropertyNestedInput = {
   deleteMany?: Prisma.UnitScalarWhereInput | Prisma.UnitScalarWhereInput[]
 }
 
+export type UnitCreateNestedOneWithoutTenantsInput = {
+  create?: Prisma.XOR<Prisma.UnitCreateWithoutTenantsInput, Prisma.UnitUncheckedCreateWithoutTenantsInput>
+  connectOrCreate?: Prisma.UnitCreateOrConnectWithoutTenantsInput
+  connect?: Prisma.UnitWhereUniqueInput
+}
+
+export type UnitUpdateOneWithoutTenantsNestedInput = {
+  create?: Prisma.XOR<Prisma.UnitCreateWithoutTenantsInput, Prisma.UnitUncheckedCreateWithoutTenantsInput>
+  connectOrCreate?: Prisma.UnitCreateOrConnectWithoutTenantsInput
+  upsert?: Prisma.UnitUpsertWithoutTenantsInput
+  disconnect?: Prisma.UnitWhereInput | boolean
+  delete?: Prisma.UnitWhereInput | boolean
+  connect?: Prisma.UnitWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UnitUpdateToOneWithWhereWithoutTenantsInput, Prisma.UnitUpdateWithoutTenantsInput>, Prisma.UnitUncheckedUpdateWithoutTenantsInput>
+}
+
 export type EnumUnitTypeFieldUpdateOperationsInput = {
   set?: $Enums.UnitType
 }
@@ -724,12 +752,12 @@ export type UnitCreateWithoutAgreementsInput = {
   picturePublicId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  tenants?: Prisma.TenantCreateNestedManyWithoutUnitInput
   property: Prisma.PropertyCreateNestedOneWithoutUnitsInput
 }
 
 export type UnitUncheckedCreateWithoutAgreementsInput = {
   id?: string
-  propertyId: string
   unitNo: string
   type: $Enums.UnitType
   floor?: number | null
@@ -739,10 +767,12 @@ export type UnitUncheckedCreateWithoutAgreementsInput = {
   monthlyRent: runtime.Decimal | runtime.DecimalJsLike | number | string
   securityDepositAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: $Enums.UnitStatus
+  propertyId: string
   pictureUrl?: string | null
   picturePublicId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  tenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUnitInput
 }
 
 export type UnitCreateOrConnectWithoutAgreementsInput = {
@@ -776,12 +806,12 @@ export type UnitUpdateWithoutAgreementsInput = {
   picturePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tenants?: Prisma.TenantUpdateManyWithoutUnitNestedInput
   property?: Prisma.PropertyUpdateOneRequiredWithoutUnitsNestedInput
 }
 
 export type UnitUncheckedUpdateWithoutAgreementsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  propertyId?: Prisma.StringFieldUpdateOperationsInput | string
   unitNo?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
   floor?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -791,10 +821,12 @@ export type UnitUncheckedUpdateWithoutAgreementsInput = {
   monthlyRent?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   securityDepositAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumUnitStatusFieldUpdateOperationsInput | $Enums.UnitStatus
+  propertyId?: Prisma.StringFieldUpdateOperationsInput | string
   pictureUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   picturePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tenants?: Prisma.TenantUncheckedUpdateManyWithoutUnitNestedInput
 }
 
 export type UnitCreateWithoutPropertyInput = {
@@ -813,6 +845,7 @@ export type UnitCreateWithoutPropertyInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   agreements?: Prisma.AgreementCreateNestedManyWithoutUnitInput
+  tenants?: Prisma.TenantCreateNestedManyWithoutUnitInput
 }
 
 export type UnitUncheckedCreateWithoutPropertyInput = {
@@ -831,6 +864,7 @@ export type UnitUncheckedCreateWithoutPropertyInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   agreements?: Prisma.AgreementUncheckedCreateNestedManyWithoutUnitInput
+  tenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUnitInput
 }
 
 export type UnitCreateOrConnectWithoutPropertyInput = {
@@ -864,7 +898,6 @@ export type UnitScalarWhereInput = {
   OR?: Prisma.UnitScalarWhereInput[]
   NOT?: Prisma.UnitScalarWhereInput | Prisma.UnitScalarWhereInput[]
   id?: Prisma.StringFilter<"Unit"> | string
-  propertyId?: Prisma.StringFilter<"Unit"> | string
   unitNo?: Prisma.StringFilter<"Unit"> | string
   type?: Prisma.EnumUnitTypeFilter<"Unit"> | $Enums.UnitType
   floor?: Prisma.IntNullableFilter<"Unit"> | number | null
@@ -874,10 +907,103 @@ export type UnitScalarWhereInput = {
   monthlyRent?: Prisma.DecimalFilter<"Unit"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   securityDepositAmount?: Prisma.DecimalFilter<"Unit"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   status?: Prisma.EnumUnitStatusFilter<"Unit"> | $Enums.UnitStatus
+  propertyId?: Prisma.StringFilter<"Unit"> | string
   pictureUrl?: Prisma.StringNullableFilter<"Unit"> | string | null
   picturePublicId?: Prisma.StringNullableFilter<"Unit"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Unit"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Unit"> | Date | string
+}
+
+export type UnitCreateWithoutTenantsInput = {
+  id?: string
+  unitNo: string
+  type: $Enums.UnitType
+  floor?: number | null
+  lengthFt?: number | null
+  widthFt?: number | null
+  occupancyLimit?: number | null
+  monthlyRent: runtime.Decimal | runtime.DecimalJsLike | number | string
+  securityDepositAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  status?: $Enums.UnitStatus
+  pictureUrl?: string | null
+  picturePublicId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  agreements?: Prisma.AgreementCreateNestedManyWithoutUnitInput
+  property: Prisma.PropertyCreateNestedOneWithoutUnitsInput
+}
+
+export type UnitUncheckedCreateWithoutTenantsInput = {
+  id?: string
+  unitNo: string
+  type: $Enums.UnitType
+  floor?: number | null
+  lengthFt?: number | null
+  widthFt?: number | null
+  occupancyLimit?: number | null
+  monthlyRent: runtime.Decimal | runtime.DecimalJsLike | number | string
+  securityDepositAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  status?: $Enums.UnitStatus
+  propertyId: string
+  pictureUrl?: string | null
+  picturePublicId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  agreements?: Prisma.AgreementUncheckedCreateNestedManyWithoutUnitInput
+}
+
+export type UnitCreateOrConnectWithoutTenantsInput = {
+  where: Prisma.UnitWhereUniqueInput
+  create: Prisma.XOR<Prisma.UnitCreateWithoutTenantsInput, Prisma.UnitUncheckedCreateWithoutTenantsInput>
+}
+
+export type UnitUpsertWithoutTenantsInput = {
+  update: Prisma.XOR<Prisma.UnitUpdateWithoutTenantsInput, Prisma.UnitUncheckedUpdateWithoutTenantsInput>
+  create: Prisma.XOR<Prisma.UnitCreateWithoutTenantsInput, Prisma.UnitUncheckedCreateWithoutTenantsInput>
+  where?: Prisma.UnitWhereInput
+}
+
+export type UnitUpdateToOneWithWhereWithoutTenantsInput = {
+  where?: Prisma.UnitWhereInput
+  data: Prisma.XOR<Prisma.UnitUpdateWithoutTenantsInput, Prisma.UnitUncheckedUpdateWithoutTenantsInput>
+}
+
+export type UnitUpdateWithoutTenantsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  unitNo?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
+  floor?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  lengthFt?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  widthFt?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  occupancyLimit?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  monthlyRent?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  securityDepositAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  status?: Prisma.EnumUnitStatusFieldUpdateOperationsInput | $Enums.UnitStatus
+  pictureUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  picturePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  agreements?: Prisma.AgreementUpdateManyWithoutUnitNestedInput
+  property?: Prisma.PropertyUpdateOneRequiredWithoutUnitsNestedInput
+}
+
+export type UnitUncheckedUpdateWithoutTenantsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  unitNo?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
+  floor?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  lengthFt?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  widthFt?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  occupancyLimit?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  monthlyRent?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  securityDepositAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  status?: Prisma.EnumUnitStatusFieldUpdateOperationsInput | $Enums.UnitStatus
+  propertyId?: Prisma.StringFieldUpdateOperationsInput | string
+  pictureUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  picturePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  agreements?: Prisma.AgreementUncheckedUpdateManyWithoutUnitNestedInput
 }
 
 export type UnitCreateManyPropertyInput = {
@@ -913,6 +1039,7 @@ export type UnitUpdateWithoutPropertyInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   agreements?: Prisma.AgreementUpdateManyWithoutUnitNestedInput
+  tenants?: Prisma.TenantUpdateManyWithoutUnitNestedInput
 }
 
 export type UnitUncheckedUpdateWithoutPropertyInput = {
@@ -931,6 +1058,7 @@ export type UnitUncheckedUpdateWithoutPropertyInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   agreements?: Prisma.AgreementUncheckedUpdateManyWithoutUnitNestedInput
+  tenants?: Prisma.TenantUncheckedUpdateManyWithoutUnitNestedInput
 }
 
 export type UnitUncheckedUpdateManyWithoutPropertyInput = {
@@ -957,10 +1085,12 @@ export type UnitUncheckedUpdateManyWithoutPropertyInput = {
 
 export type UnitCountOutputType = {
   agreements: number
+  tenants: number
 }
 
 export type UnitCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   agreements?: boolean | UnitCountOutputTypeCountAgreementsArgs
+  tenants?: boolean | UnitCountOutputTypeCountTenantsArgs
 }
 
 /**
@@ -980,10 +1110,16 @@ export type UnitCountOutputTypeCountAgreementsArgs<ExtArgs extends runtime.Types
   where?: Prisma.AgreementWhereInput
 }
 
+/**
+ * UnitCountOutputType without action
+ */
+export type UnitCountOutputTypeCountTenantsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TenantWhereInput
+}
+
 
 export type UnitSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  propertyId?: boolean
   unitNo?: boolean
   type?: boolean
   floor?: boolean
@@ -993,18 +1129,19 @@ export type UnitSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   monthlyRent?: boolean
   securityDepositAmount?: boolean
   status?: boolean
+  propertyId?: boolean
   pictureUrl?: boolean
   picturePublicId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  property?: boolean | Prisma.PropertyDefaultArgs<ExtArgs>
   agreements?: boolean | Prisma.Unit$agreementsArgs<ExtArgs>
+  tenants?: boolean | Prisma.Unit$tenantsArgs<ExtArgs>
+  property?: boolean | Prisma.PropertyDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.UnitCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["unit"]>
 
 export type UnitSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  propertyId?: boolean
   unitNo?: boolean
   type?: boolean
   floor?: boolean
@@ -1014,6 +1151,7 @@ export type UnitSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   monthlyRent?: boolean
   securityDepositAmount?: boolean
   status?: boolean
+  propertyId?: boolean
   pictureUrl?: boolean
   picturePublicId?: boolean
   createdAt?: boolean
@@ -1023,7 +1161,6 @@ export type UnitSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
 
 export type UnitSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  propertyId?: boolean
   unitNo?: boolean
   type?: boolean
   floor?: boolean
@@ -1033,6 +1170,7 @@ export type UnitSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   monthlyRent?: boolean
   securityDepositAmount?: boolean
   status?: boolean
+  propertyId?: boolean
   pictureUrl?: boolean
   picturePublicId?: boolean
   createdAt?: boolean
@@ -1042,7 +1180,6 @@ export type UnitSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
 
 export type UnitSelectScalar = {
   id?: boolean
-  propertyId?: boolean
   unitNo?: boolean
   type?: boolean
   floor?: boolean
@@ -1052,16 +1189,18 @@ export type UnitSelectScalar = {
   monthlyRent?: boolean
   securityDepositAmount?: boolean
   status?: boolean
+  propertyId?: boolean
   pictureUrl?: boolean
   picturePublicId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type UnitOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "propertyId" | "unitNo" | "type" | "floor" | "lengthFt" | "widthFt" | "occupancyLimit" | "monthlyRent" | "securityDepositAmount" | "status" | "pictureUrl" | "picturePublicId" | "createdAt" | "updatedAt", ExtArgs["result"]["unit"]>
+export type UnitOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "unitNo" | "type" | "floor" | "lengthFt" | "widthFt" | "occupancyLimit" | "monthlyRent" | "securityDepositAmount" | "status" | "propertyId" | "pictureUrl" | "picturePublicId" | "createdAt" | "updatedAt", ExtArgs["result"]["unit"]>
 export type UnitInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  property?: boolean | Prisma.PropertyDefaultArgs<ExtArgs>
   agreements?: boolean | Prisma.Unit$agreementsArgs<ExtArgs>
+  tenants?: boolean | Prisma.Unit$tenantsArgs<ExtArgs>
+  property?: boolean | Prisma.PropertyDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.UnitCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UnitIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1074,12 +1213,12 @@ export type UnitIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
 export type $UnitPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Unit"
   objects: {
-    property: Prisma.$PropertyPayload<ExtArgs>
     agreements: Prisma.$AgreementPayload<ExtArgs>[]
+    tenants: Prisma.$TenantPayload<ExtArgs>[]
+    property: Prisma.$PropertyPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
-    propertyId: string
     unitNo: string
     type: $Enums.UnitType
     floor: number | null
@@ -1089,6 +1228,7 @@ export type $UnitPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     monthlyRent: runtime.Decimal
     securityDepositAmount: runtime.Decimal
     status: $Enums.UnitStatus
+    propertyId: string
     pictureUrl: string | null
     picturePublicId: string | null
     createdAt: Date
@@ -1487,8 +1627,9 @@ readonly fields: UnitFieldRefs;
  */
 export interface Prisma__UnitClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  property<T extends Prisma.PropertyDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PropertyDefaultArgs<ExtArgs>>): Prisma.Prisma__PropertyClient<runtime.Types.Result.GetResult<Prisma.$PropertyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   agreements<T extends Prisma.Unit$agreementsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Unit$agreementsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AgreementPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  tenants<T extends Prisma.Unit$tenantsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Unit$tenantsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  property<T extends Prisma.PropertyDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PropertyDefaultArgs<ExtArgs>>): Prisma.Prisma__PropertyClient<runtime.Types.Result.GetResult<Prisma.$PropertyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1519,7 +1660,6 @@ export interface Prisma__UnitClient<T, Null = never, ExtArgs extends runtime.Typ
  */
 export interface UnitFieldRefs {
   readonly id: Prisma.FieldRef<"Unit", 'String'>
-  readonly propertyId: Prisma.FieldRef<"Unit", 'String'>
   readonly unitNo: Prisma.FieldRef<"Unit", 'String'>
   readonly type: Prisma.FieldRef<"Unit", 'UnitType'>
   readonly floor: Prisma.FieldRef<"Unit", 'Int'>
@@ -1529,6 +1669,7 @@ export interface UnitFieldRefs {
   readonly monthlyRent: Prisma.FieldRef<"Unit", 'Decimal'>
   readonly securityDepositAmount: Prisma.FieldRef<"Unit", 'Decimal'>
   readonly status: Prisma.FieldRef<"Unit", 'UnitStatus'>
+  readonly propertyId: Prisma.FieldRef<"Unit", 'String'>
   readonly pictureUrl: Prisma.FieldRef<"Unit", 'String'>
   readonly picturePublicId: Prisma.FieldRef<"Unit", 'String'>
   readonly createdAt: Prisma.FieldRef<"Unit", 'DateTime'>
@@ -1955,6 +2096,30 @@ export type Unit$agreementsArgs<ExtArgs extends runtime.Types.Extensions.Interna
   take?: number
   skip?: number
   distinct?: Prisma.AgreementScalarFieldEnum | Prisma.AgreementScalarFieldEnum[]
+}
+
+/**
+ * Unit.tenants
+ */
+export type Unit$tenantsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Tenant
+   */
+  select?: Prisma.TenantSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Tenant
+   */
+  omit?: Prisma.TenantOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TenantInclude<ExtArgs> | null
+  where?: Prisma.TenantWhereInput
+  orderBy?: Prisma.TenantOrderByWithRelationInput | Prisma.TenantOrderByWithRelationInput[]
+  cursor?: Prisma.TenantWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TenantScalarFieldEnum | Prisma.TenantScalarFieldEnum[]
 }
 
 /**

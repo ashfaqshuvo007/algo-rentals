@@ -3,10 +3,9 @@ model Property {
   name      String    @unique
   address   String
 
-  ownerId   String?
-  owner     Owner?
+  ownerId   String? @unique
+  owner     Owner? @relation(fields: [ownerId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 
-  tenants   Tenant[]
   units     Unit[]
 
   createdAt DateTime @default(now())

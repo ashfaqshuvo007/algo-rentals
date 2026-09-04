@@ -1,7 +1,6 @@
 model Unit {
   id                    String      @id @default(uuid())
-  propertyId            String
-  property              Property    @relation(fields: [propertyId], references: [id])
+  
   unitNo                String
   type                  UnitType
   floor                 Int?
@@ -11,7 +10,11 @@ model Unit {
   monthlyRent           Decimal
   securityDepositAmount Decimal
   status                UnitStatus  @default(VACANT)
+
   agreements            Agreement[]
+  tenants               Tenant[]
+  propertyId            String
+  property              Property    @relation(fields: [propertyId], references: [id])
 
   pictureUrl      String?
   picturePublicId String?

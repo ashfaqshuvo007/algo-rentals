@@ -14,6 +14,7 @@ import { notFound } from "./app/middleware/notFound";
 import { AuthRoutes } from "./app/module/auth/auth.route";
 import { PropertyRoutes } from "./app/module/property/property.route";
 import { TenantRoutes } from "./app/module/tenant/tenant.route";
+import { UnitRoutes } from "./app/module/unit/unit.route";
 
 const app: Application = express();
 
@@ -34,6 +35,7 @@ app.use(cookieParser());
 app.use("/api/v1/auth", AuthRoutes);
 app.use("/api/v1/tenant", TenantRoutes);
 app.use("/api/v1/property", PropertyRoutes);
+app.use("/api/v1/unit", UnitRoutes);
 
 // Basic route
 app.get("/", async (req: Request, res: Response) => {

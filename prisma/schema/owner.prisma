@@ -13,7 +13,7 @@ model Owner {
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 
   propertyId String? @unique
-  property Property? @relation(fields: [propertyId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  property Property? 
 
   @@index([email], name: "idx_owner_email")
   @@index([isDeleted], name: "idx_owner_isDeleted")

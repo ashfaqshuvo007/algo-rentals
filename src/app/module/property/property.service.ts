@@ -60,7 +60,7 @@ const assignPropertyToOwner = async (
 		},
 	});
 
-	if (checkOwnerExists) {
+	if (!checkOwnerExists) {
 		throw new Error("Owner Not Found");
 	}
 
@@ -74,6 +74,9 @@ const assignPropertyToOwner = async (
 		},
 		data: {
 			ownerId: ownerId,
+		},
+		include: {
+			owner: true,
 		},
 	});
 

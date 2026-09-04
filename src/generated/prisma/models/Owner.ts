@@ -287,6 +287,7 @@ export type OwnerCreateInput = {
   deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  propertyId?: string | null
   user: Prisma.UserCreateNestedOneWithoutOwnerInput
   property?: Prisma.PropertyCreateNestedOneWithoutOwnerInput
 }
@@ -301,6 +302,7 @@ export type OwnerUncheckedCreateInput = {
   updatedAt?: Date | string
   userId: string
   propertyId?: string | null
+  property?: Prisma.PropertyUncheckedCreateNestedOneWithoutOwnerInput
 }
 
 export type OwnerUpdateInput = {
@@ -311,6 +313,7 @@ export type OwnerUpdateInput = {
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  propertyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user?: Prisma.UserUpdateOneRequiredWithoutOwnerNestedInput
   property?: Prisma.PropertyUpdateOneWithoutOwnerNestedInput
 }
@@ -325,6 +328,7 @@ export type OwnerUncheckedUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   propertyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  property?: Prisma.PropertyUncheckedUpdateOneWithoutOwnerNestedInput
 }
 
 export type OwnerCreateManyInput = {
@@ -347,6 +351,7 @@ export type OwnerUpdateManyMutationInput = {
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  propertyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type OwnerUncheckedUpdateManyInput = {
@@ -416,23 +421,7 @@ export type OwnerCreateNestedOneWithoutPropertyInput = {
   connect?: Prisma.OwnerWhereUniqueInput
 }
 
-export type OwnerUncheckedCreateNestedOneWithoutPropertyInput = {
-  create?: Prisma.XOR<Prisma.OwnerCreateWithoutPropertyInput, Prisma.OwnerUncheckedCreateWithoutPropertyInput>
-  connectOrCreate?: Prisma.OwnerCreateOrConnectWithoutPropertyInput
-  connect?: Prisma.OwnerWhereUniqueInput
-}
-
 export type OwnerUpdateOneWithoutPropertyNestedInput = {
-  create?: Prisma.XOR<Prisma.OwnerCreateWithoutPropertyInput, Prisma.OwnerUncheckedCreateWithoutPropertyInput>
-  connectOrCreate?: Prisma.OwnerCreateOrConnectWithoutPropertyInput
-  upsert?: Prisma.OwnerUpsertWithoutPropertyInput
-  disconnect?: Prisma.OwnerWhereInput | boolean
-  delete?: Prisma.OwnerWhereInput | boolean
-  connect?: Prisma.OwnerWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.OwnerUpdateToOneWithWhereWithoutPropertyInput, Prisma.OwnerUpdateWithoutPropertyInput>, Prisma.OwnerUncheckedUpdateWithoutPropertyInput>
-}
-
-export type OwnerUncheckedUpdateOneWithoutPropertyNestedInput = {
   create?: Prisma.XOR<Prisma.OwnerCreateWithoutPropertyInput, Prisma.OwnerUncheckedCreateWithoutPropertyInput>
   connectOrCreate?: Prisma.OwnerCreateOrConnectWithoutPropertyInput
   upsert?: Prisma.OwnerUpsertWithoutPropertyInput
@@ -482,6 +471,7 @@ export type OwnerCreateWithoutPropertyInput = {
   deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  propertyId?: string | null
   user: Prisma.UserCreateNestedOneWithoutOwnerInput
 }
 
@@ -494,6 +484,7 @@ export type OwnerUncheckedCreateWithoutPropertyInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   userId: string
+  propertyId?: string | null
 }
 
 export type OwnerCreateOrConnectWithoutPropertyInput = {
@@ -520,6 +511,7 @@ export type OwnerUpdateWithoutPropertyInput = {
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  propertyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user?: Prisma.UserUpdateOneRequiredWithoutOwnerNestedInput
 }
 
@@ -532,6 +524,7 @@ export type OwnerUncheckedUpdateWithoutPropertyInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  propertyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type OwnerCreateWithoutUserInput = {
@@ -542,6 +535,7 @@ export type OwnerCreateWithoutUserInput = {
   deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  propertyId?: string | null
   property?: Prisma.PropertyCreateNestedOneWithoutOwnerInput
 }
 
@@ -554,6 +548,7 @@ export type OwnerUncheckedCreateWithoutUserInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   propertyId?: string | null
+  property?: Prisma.PropertyUncheckedCreateNestedOneWithoutOwnerInput
 }
 
 export type OwnerCreateOrConnectWithoutUserInput = {
@@ -580,6 +575,7 @@ export type OwnerUpdateWithoutUserInput = {
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  propertyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   property?: Prisma.PropertyUpdateOneWithoutOwnerNestedInput
 }
 
@@ -592,6 +588,7 @@ export type OwnerUncheckedUpdateWithoutUserInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   propertyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  property?: Prisma.PropertyUncheckedUpdateOneWithoutOwnerNestedInput
 }
 
 
@@ -621,7 +618,6 @@ export type OwnerSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   userId?: boolean
   propertyId?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-  property?: boolean | Prisma.Owner$propertyArgs<ExtArgs>
 }, ExtArgs["result"]["owner"]>
 
 export type OwnerSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -635,7 +631,6 @@ export type OwnerSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   userId?: boolean
   propertyId?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-  property?: boolean | Prisma.Owner$propertyArgs<ExtArgs>
 }, ExtArgs["result"]["owner"]>
 
 export type OwnerSelectScalar = {
@@ -657,11 +652,9 @@ export type OwnerInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs =
 }
 export type OwnerIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-  property?: boolean | Prisma.Owner$propertyArgs<ExtArgs>
 }
 export type OwnerIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-  property?: boolean | Prisma.Owner$propertyArgs<ExtArgs>
 }
 
 export type $OwnerPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {

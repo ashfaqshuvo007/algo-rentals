@@ -2,8 +2,8 @@ model Payment {
   id                 String        @id @default(uuid())
   tenantProfileId    String?       @unique
   tenant             Tenant?       @relation(fields: [tenantProfileId], references: [id])
-  rentalAgreementId  String?
-  agreement          Agreement?    @relation(fields: [rentalAgreementId], references: [id])
+  agreementId  String?
+  agreement          Agreement?    @relation(fields: [agreementId], references: [id])
   type               PaymentType
   method             PaymentMethod @default(BKASH)
   amount             Decimal

@@ -112,7 +112,7 @@ export type OwnerScalarFieldEnum = (typeof OwnerScalarFieldEnum)[keyof typeof Ow
 export const PaymentScalarFieldEnum = {
   id: 'id',
   tenantProfileId: 'tenantProfileId',
-  rentalAgreementId: 'rentalAgreementId',
+  agreementId: 'agreementId',
   type: 'type',
   method: 'method',
   amount: 'amount',
@@ -155,7 +155,7 @@ export const TenantScalarFieldEnum = {
   updatedAt: 'updatedAt',
   userId: 'userId',
   agreementId: 'agreementId',
-  propertyId: 'propertyId'
+  unitId: 'unitId'
 } as const
 
 export type TenantScalarFieldEnum = (typeof TenantScalarFieldEnum)[keyof typeof TenantScalarFieldEnum]
@@ -163,7 +163,6 @@ export type TenantScalarFieldEnum = (typeof TenantScalarFieldEnum)[keyof typeof 
 
 export const UnitScalarFieldEnum = {
   id: 'id',
-  propertyId: 'propertyId',
   unitNo: 'unitNo',
   type: 'type',
   floor: 'floor',
@@ -173,6 +172,7 @@ export const UnitScalarFieldEnum = {
   monthlyRent: 'monthlyRent',
   securityDepositAmount: 'securityDepositAmount',
   status: 'status',
+  propertyId: 'propertyId',
   pictureUrl: 'pictureUrl',
   picturePublicId: 'picturePublicId',
   createdAt: 'createdAt',
