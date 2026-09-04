@@ -1,0 +1,7 @@
+model Property {
+  id        String   @id @default(uuid())
+  name      String
+  address   String
+  units     Unit[]
+  createdAt DateTime @default(now())
+}

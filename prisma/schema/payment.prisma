@@ -1,0 +1,17 @@
+model Payment {
+  id                String        @id @default(uuid())
+  tenantProfileId   String
+  tenant            Tenant @relation(fields: [tenantProfileId], references: [id])
+  rentalAgreementId String?
+  agreement         Agreement? @relation(fields: [rentalAgreementId], references: [id])
+  type              PaymentType
+  method            PaymentMethod
+  amount            Decimal
+  bkashTransactionId String?      @unique
+  status            PaymentStatus @default(INITIATED)
+  paidAt            DateTime?
+  createdAt         DateTime      @default(now())
+
+  @@index([status])
+  @@index([bkashTransactionId])
+}

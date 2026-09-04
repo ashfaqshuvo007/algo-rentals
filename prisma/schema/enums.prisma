@@ -1,0 +1,64 @@
+enum Role {
+  ADMIN
+  OWNER
+  TENANT
+}
+
+enum UserStatus {
+  ACTIVE
+  BLOCKED
+  DELETED
+}
+
+enum Gender {
+  MALE
+  FEMALE
+  OTHER
+}
+
+enum AuthProvider {
+  GOOGLE
+  CREDENTIAL
+}
+
+enum PaymentStatus {
+  INITIATED
+  UNPAID
+  PAID
+  FAILED
+  CANCELLED
+  REFUNDED
+}
+
+enum AgreementStatus {
+  DRAFT
+  PENDING_PAYMENT
+  ACTIVE
+  TERMINATED
+  EXPIRED
+}
+
+enum UnitType {
+  ROOM
+  SHOP
+}
+
+enum UnitStatus {
+  VACANT
+  RESERVED
+  OCCUPIED
+  MAINTENANCE
+}
+
+enum PaymentType {
+  SECURITY_DEPOSIT
+  ADVANCE
+  RENT
+}
+
+enum PaymentMethod {
+  BKASH
+  CASH
+  BANK_TRANSFER
+}
+
