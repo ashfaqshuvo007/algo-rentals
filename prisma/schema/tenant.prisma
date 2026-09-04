@@ -25,7 +25,10 @@ model Tenant {
   agreementId String?     @unique
   agreement   Agreement?
 
-  payment Payment?
+  payments Payment[]
+
+  propertyId String? @unique
+  property Property? @relation(fields: [propertyId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 
   @@index([email], name: "idx_tenant_email")
   @@index([isDeleted], name: "idx_tenant_isDeleted")

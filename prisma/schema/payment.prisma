@@ -15,4 +15,5 @@ model Payment {
 
   @@index([status])
   @@index([bkashTransactionId])
+  @@map("payments")
 }

@@ -2,8 +2,15 @@ model Property {
   id        String   @id @default(uuid())
   name      String
   address   String
+
+  ownerId   String?
+  owner     Owner?
+
+  tenants   Tenant[]
   units     Unit[]
+
   createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@map("properties")
 }
