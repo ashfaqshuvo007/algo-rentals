@@ -11,6 +11,7 @@ import config from "./app/config";
 import { BkashConfig } from "./app/lib/bkash";
 import { globalErrorHandler } from "./app/middleware/globalErrorHandler";
 import { notFound } from "./app/middleware/notFound";
+import { AgreementRoutes } from "./app/module/agreement/agreement.route";
 import { AuthRoutes } from "./app/module/auth/auth.route";
 import { PropertyRoutes } from "./app/module/property/property.route";
 import { TenantRoutes } from "./app/module/tenant/tenant.route";
@@ -36,6 +37,7 @@ app.use("/api/v1/auth", AuthRoutes);
 app.use("/api/v1/tenant", TenantRoutes);
 app.use("/api/v1/property", PropertyRoutes);
 app.use("/api/v1/unit", UnitRoutes);
+app.use("/api/v1/agreement", AgreementRoutes);
 
 // Basic route
 app.get("/", async (req: Request, res: Response) => {

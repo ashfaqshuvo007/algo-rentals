@@ -41,6 +41,7 @@ export type PaymentMinAggregateOutputType = {
   type: $Enums.PaymentType | null
   method: $Enums.PaymentMethod | null
   amount: runtime.Decimal | null
+  bkashPaymentId: string | null
   bkashTransactionId: string | null
   status: $Enums.PaymentStatus | null
   paidAt: Date | null
@@ -54,6 +55,7 @@ export type PaymentMaxAggregateOutputType = {
   type: $Enums.PaymentType | null
   method: $Enums.PaymentMethod | null
   amount: runtime.Decimal | null
+  bkashPaymentId: string | null
   bkashTransactionId: string | null
   status: $Enums.PaymentStatus | null
   paidAt: Date | null
@@ -67,6 +69,7 @@ export type PaymentCountAggregateOutputType = {
   type: number
   method: number
   amount: number
+  bkashPaymentId: number
   bkashTransactionId: number
   gatewayResponse: number
   status: number
@@ -91,6 +94,7 @@ export type PaymentMinAggregateInputType = {
   type?: true
   method?: true
   amount?: true
+  bkashPaymentId?: true
   bkashTransactionId?: true
   status?: true
   paidAt?: true
@@ -104,6 +108,7 @@ export type PaymentMaxAggregateInputType = {
   type?: true
   method?: true
   amount?: true
+  bkashPaymentId?: true
   bkashTransactionId?: true
   status?: true
   paidAt?: true
@@ -117,6 +122,7 @@ export type PaymentCountAggregateInputType = {
   type?: true
   method?: true
   amount?: true
+  bkashPaymentId?: true
   bkashTransactionId?: true
   gatewayResponse?: true
   status?: true
@@ -218,6 +224,7 @@ export type PaymentGroupByOutputType = {
   type: $Enums.PaymentType
   method: $Enums.PaymentMethod
   amount: runtime.Decimal
+  bkashPaymentId: string | null
   bkashTransactionId: string | null
   gatewayResponse: runtime.JsonValue | null
   status: $Enums.PaymentStatus
@@ -255,6 +262,7 @@ export type PaymentWhereInput = {
   type?: Prisma.EnumPaymentTypeFilter<"Payment"> | $Enums.PaymentType
   method?: Prisma.EnumPaymentMethodFilter<"Payment"> | $Enums.PaymentMethod
   amount?: Prisma.DecimalFilter<"Payment"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  bkashPaymentId?: Prisma.StringNullableFilter<"Payment"> | string | null
   bkashTransactionId?: Prisma.StringNullableFilter<"Payment"> | string | null
   gatewayResponse?: Prisma.JsonNullableFilter<"Payment">
   status?: Prisma.EnumPaymentStatusFilter<"Payment"> | $Enums.PaymentStatus
@@ -271,6 +279,7 @@ export type PaymentOrderByWithRelationInput = {
   type?: Prisma.SortOrder
   method?: Prisma.SortOrder
   amount?: Prisma.SortOrder
+  bkashPaymentId?: Prisma.SortOrderInput | Prisma.SortOrder
   bkashTransactionId?: Prisma.SortOrderInput | Prisma.SortOrder
   gatewayResponse?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
@@ -282,11 +291,12 @@ export type PaymentOrderByWithRelationInput = {
 
 export type PaymentWhereUniqueInput = Prisma.AtLeast<{
   id?: string
-  tenantProfileId?: string
+  bkashPaymentId?: string
   bkashTransactionId?: string
   AND?: Prisma.PaymentWhereInput | Prisma.PaymentWhereInput[]
   OR?: Prisma.PaymentWhereInput[]
   NOT?: Prisma.PaymentWhereInput | Prisma.PaymentWhereInput[]
+  tenantProfileId?: Prisma.StringNullableFilter<"Payment"> | string | null
   agreementId?: Prisma.StringNullableFilter<"Payment"> | string | null
   type?: Prisma.EnumPaymentTypeFilter<"Payment"> | $Enums.PaymentType
   method?: Prisma.EnumPaymentMethodFilter<"Payment"> | $Enums.PaymentMethod
@@ -297,7 +307,7 @@ export type PaymentWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"Payment"> | Date | string
   tenant?: Prisma.XOR<Prisma.TenantNullableScalarRelationFilter, Prisma.TenantWhereInput> | null
   agreement?: Prisma.XOR<Prisma.AgreementNullableScalarRelationFilter, Prisma.AgreementWhereInput> | null
-}, "id" | "tenantProfileId" | "bkashTransactionId">
+}, "id" | "bkashPaymentId" | "bkashTransactionId">
 
 export type PaymentOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -306,6 +316,7 @@ export type PaymentOrderByWithAggregationInput = {
   type?: Prisma.SortOrder
   method?: Prisma.SortOrder
   amount?: Prisma.SortOrder
+  bkashPaymentId?: Prisma.SortOrderInput | Prisma.SortOrder
   bkashTransactionId?: Prisma.SortOrderInput | Prisma.SortOrder
   gatewayResponse?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
@@ -328,6 +339,7 @@ export type PaymentScalarWhereWithAggregatesInput = {
   type?: Prisma.EnumPaymentTypeWithAggregatesFilter<"Payment"> | $Enums.PaymentType
   method?: Prisma.EnumPaymentMethodWithAggregatesFilter<"Payment"> | $Enums.PaymentMethod
   amount?: Prisma.DecimalWithAggregatesFilter<"Payment"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  bkashPaymentId?: Prisma.StringNullableWithAggregatesFilter<"Payment"> | string | null
   bkashTransactionId?: Prisma.StringNullableWithAggregatesFilter<"Payment"> | string | null
   gatewayResponse?: Prisma.JsonNullableWithAggregatesFilter<"Payment">
   status?: Prisma.EnumPaymentStatusWithAggregatesFilter<"Payment"> | $Enums.PaymentStatus
@@ -340,6 +352,7 @@ export type PaymentCreateInput = {
   type: $Enums.PaymentType
   method?: $Enums.PaymentMethod
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  bkashPaymentId?: string | null
   bkashTransactionId?: string | null
   gatewayResponse?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   status?: $Enums.PaymentStatus
@@ -356,6 +369,7 @@ export type PaymentUncheckedCreateInput = {
   type: $Enums.PaymentType
   method?: $Enums.PaymentMethod
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  bkashPaymentId?: string | null
   bkashTransactionId?: string | null
   gatewayResponse?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   status?: $Enums.PaymentStatus
@@ -368,6 +382,7 @@ export type PaymentUpdateInput = {
   type?: Prisma.EnumPaymentTypeFieldUpdateOperationsInput | $Enums.PaymentType
   method?: Prisma.EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  bkashPaymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bkashTransactionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gatewayResponse?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
@@ -384,6 +399,7 @@ export type PaymentUncheckedUpdateInput = {
   type?: Prisma.EnumPaymentTypeFieldUpdateOperationsInput | $Enums.PaymentType
   method?: Prisma.EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  bkashPaymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bkashTransactionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gatewayResponse?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
@@ -398,6 +414,7 @@ export type PaymentCreateManyInput = {
   type: $Enums.PaymentType
   method?: $Enums.PaymentMethod
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  bkashPaymentId?: string | null
   bkashTransactionId?: string | null
   gatewayResponse?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   status?: $Enums.PaymentStatus
@@ -410,6 +427,7 @@ export type PaymentUpdateManyMutationInput = {
   type?: Prisma.EnumPaymentTypeFieldUpdateOperationsInput | $Enums.PaymentType
   method?: Prisma.EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  bkashPaymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bkashTransactionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gatewayResponse?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
@@ -424,6 +442,7 @@ export type PaymentUncheckedUpdateManyInput = {
   type?: Prisma.EnumPaymentTypeFieldUpdateOperationsInput | $Enums.PaymentType
   method?: Prisma.EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  bkashPaymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bkashTransactionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gatewayResponse?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
@@ -448,6 +467,7 @@ export type PaymentCountOrderByAggregateInput = {
   type?: Prisma.SortOrder
   method?: Prisma.SortOrder
   amount?: Prisma.SortOrder
+  bkashPaymentId?: Prisma.SortOrder
   bkashTransactionId?: Prisma.SortOrder
   gatewayResponse?: Prisma.SortOrder
   status?: Prisma.SortOrder
@@ -466,6 +486,7 @@ export type PaymentMaxOrderByAggregateInput = {
   type?: Prisma.SortOrder
   method?: Prisma.SortOrder
   amount?: Prisma.SortOrder
+  bkashPaymentId?: Prisma.SortOrder
   bkashTransactionId?: Prisma.SortOrder
   status?: Prisma.SortOrder
   paidAt?: Prisma.SortOrder
@@ -479,6 +500,7 @@ export type PaymentMinOrderByAggregateInput = {
   type?: Prisma.SortOrder
   method?: Prisma.SortOrder
   amount?: Prisma.SortOrder
+  bkashPaymentId?: Prisma.SortOrder
   bkashTransactionId?: Prisma.SortOrder
   status?: Prisma.SortOrder
   paidAt?: Prisma.SortOrder
@@ -590,6 +612,7 @@ export type PaymentCreateWithoutAgreementInput = {
   type: $Enums.PaymentType
   method?: $Enums.PaymentMethod
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  bkashPaymentId?: string | null
   bkashTransactionId?: string | null
   gatewayResponse?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   status?: $Enums.PaymentStatus
@@ -604,6 +627,7 @@ export type PaymentUncheckedCreateWithoutAgreementInput = {
   type: $Enums.PaymentType
   method?: $Enums.PaymentMethod
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  bkashPaymentId?: string | null
   bkashTransactionId?: string | null
   gatewayResponse?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   status?: $Enums.PaymentStatus
@@ -647,6 +671,7 @@ export type PaymentScalarWhereInput = {
   type?: Prisma.EnumPaymentTypeFilter<"Payment"> | $Enums.PaymentType
   method?: Prisma.EnumPaymentMethodFilter<"Payment"> | $Enums.PaymentMethod
   amount?: Prisma.DecimalFilter<"Payment"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  bkashPaymentId?: Prisma.StringNullableFilter<"Payment"> | string | null
   bkashTransactionId?: Prisma.StringNullableFilter<"Payment"> | string | null
   gatewayResponse?: Prisma.JsonNullableFilter<"Payment">
   status?: Prisma.EnumPaymentStatusFilter<"Payment"> | $Enums.PaymentStatus
@@ -659,6 +684,7 @@ export type PaymentCreateWithoutTenantInput = {
   type: $Enums.PaymentType
   method?: $Enums.PaymentMethod
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  bkashPaymentId?: string | null
   bkashTransactionId?: string | null
   gatewayResponse?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   status?: $Enums.PaymentStatus
@@ -673,6 +699,7 @@ export type PaymentUncheckedCreateWithoutTenantInput = {
   type: $Enums.PaymentType
   method?: $Enums.PaymentMethod
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  bkashPaymentId?: string | null
   bkashTransactionId?: string | null
   gatewayResponse?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   status?: $Enums.PaymentStatus
@@ -712,6 +739,7 @@ export type PaymentCreateManyAgreementInput = {
   type: $Enums.PaymentType
   method?: $Enums.PaymentMethod
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  bkashPaymentId?: string | null
   bkashTransactionId?: string | null
   gatewayResponse?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   status?: $Enums.PaymentStatus
@@ -724,6 +752,7 @@ export type PaymentUpdateWithoutAgreementInput = {
   type?: Prisma.EnumPaymentTypeFieldUpdateOperationsInput | $Enums.PaymentType
   method?: Prisma.EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  bkashPaymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bkashTransactionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gatewayResponse?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
@@ -738,6 +767,7 @@ export type PaymentUncheckedUpdateWithoutAgreementInput = {
   type?: Prisma.EnumPaymentTypeFieldUpdateOperationsInput | $Enums.PaymentType
   method?: Prisma.EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  bkashPaymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bkashTransactionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gatewayResponse?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
@@ -751,6 +781,7 @@ export type PaymentUncheckedUpdateManyWithoutAgreementInput = {
   type?: Prisma.EnumPaymentTypeFieldUpdateOperationsInput | $Enums.PaymentType
   method?: Prisma.EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  bkashPaymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bkashTransactionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gatewayResponse?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
@@ -764,6 +795,7 @@ export type PaymentCreateManyTenantInput = {
   type: $Enums.PaymentType
   method?: $Enums.PaymentMethod
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  bkashPaymentId?: string | null
   bkashTransactionId?: string | null
   gatewayResponse?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   status?: $Enums.PaymentStatus
@@ -776,6 +808,7 @@ export type PaymentUpdateWithoutTenantInput = {
   type?: Prisma.EnumPaymentTypeFieldUpdateOperationsInput | $Enums.PaymentType
   method?: Prisma.EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  bkashPaymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bkashTransactionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gatewayResponse?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
@@ -790,6 +823,7 @@ export type PaymentUncheckedUpdateWithoutTenantInput = {
   type?: Prisma.EnumPaymentTypeFieldUpdateOperationsInput | $Enums.PaymentType
   method?: Prisma.EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  bkashPaymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bkashTransactionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gatewayResponse?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
@@ -803,6 +837,7 @@ export type PaymentUncheckedUpdateManyWithoutTenantInput = {
   type?: Prisma.EnumPaymentTypeFieldUpdateOperationsInput | $Enums.PaymentType
   method?: Prisma.EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  bkashPaymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bkashTransactionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gatewayResponse?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
@@ -819,6 +854,7 @@ export type PaymentSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   type?: boolean
   method?: boolean
   amount?: boolean
+  bkashPaymentId?: boolean
   bkashTransactionId?: boolean
   gatewayResponse?: boolean
   status?: boolean
@@ -835,6 +871,7 @@ export type PaymentSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   type?: boolean
   method?: boolean
   amount?: boolean
+  bkashPaymentId?: boolean
   bkashTransactionId?: boolean
   gatewayResponse?: boolean
   status?: boolean
@@ -851,6 +888,7 @@ export type PaymentSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   type?: boolean
   method?: boolean
   amount?: boolean
+  bkashPaymentId?: boolean
   bkashTransactionId?: boolean
   gatewayResponse?: boolean
   status?: boolean
@@ -867,6 +905,7 @@ export type PaymentSelectScalar = {
   type?: boolean
   method?: boolean
   amount?: boolean
+  bkashPaymentId?: boolean
   bkashTransactionId?: boolean
   gatewayResponse?: boolean
   status?: boolean
@@ -874,7 +913,7 @@ export type PaymentSelectScalar = {
   createdAt?: boolean
 }
 
-export type PaymentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "tenantProfileId" | "agreementId" | "type" | "method" | "amount" | "bkashTransactionId" | "gatewayResponse" | "status" | "paidAt" | "createdAt", ExtArgs["result"]["payment"]>
+export type PaymentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "tenantProfileId" | "agreementId" | "type" | "method" | "amount" | "bkashPaymentId" | "bkashTransactionId" | "gatewayResponse" | "status" | "paidAt" | "createdAt", ExtArgs["result"]["payment"]>
 export type PaymentInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   tenant?: boolean | Prisma.Payment$tenantArgs<ExtArgs>
   agreement?: boolean | Prisma.Payment$agreementArgs<ExtArgs>
@@ -901,6 +940,7 @@ export type $PaymentPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     type: $Enums.PaymentType
     method: $Enums.PaymentMethod
     amount: runtime.Decimal
+    bkashPaymentId: string | null
     bkashTransactionId: string | null
     gatewayResponse: runtime.JsonValue | null
     status: $Enums.PaymentStatus
@@ -1337,6 +1377,7 @@ export interface PaymentFieldRefs {
   readonly type: Prisma.FieldRef<"Payment", 'PaymentType'>
   readonly method: Prisma.FieldRef<"Payment", 'PaymentMethod'>
   readonly amount: Prisma.FieldRef<"Payment", 'Decimal'>
+  readonly bkashPaymentId: Prisma.FieldRef<"Payment", 'String'>
   readonly bkashTransactionId: Prisma.FieldRef<"Payment", 'String'>
   readonly gatewayResponse: Prisma.FieldRef<"Payment", 'Json'>
   readonly status: Prisma.FieldRef<"Payment", 'PaymentStatus'>

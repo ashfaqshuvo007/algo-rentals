@@ -990,6 +990,8 @@ export const AgreementScalarFieldEnum = {
   monthlyRent: 'monthlyRent',
   securityDepositAmount: 'securityDepositAmount',
   activatedAt: 'activatedAt',
+  terminationRequestedAt: 'terminationRequestedAt',
+  terminationReason: 'terminationReason',
   terminatedAt: 'terminatedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -1020,6 +1022,7 @@ export const PaymentScalarFieldEnum = {
   type: 'type',
   method: 'method',
   amount: 'amount',
+  bkashPaymentId: 'bkashPaymentId',
   bkashTransactionId: 'bkashTransactionId',
   gatewayResponse: 'gatewayResponse',
   status: 'status',
@@ -1058,7 +1061,6 @@ export const TenantScalarFieldEnum = {
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   userId: 'userId',
-  agreementId: 'agreementId',
   unitId: 'unitId'
 } as const
 

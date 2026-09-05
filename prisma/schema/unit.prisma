@@ -1,6 +1,6 @@
 model Unit {
-  id                    String      @id @default(uuid())
-  
+  id String @id @default(uuid())
+
   unitNo                String
   type                  UnitType
   floor                 Int?
@@ -9,12 +9,12 @@ model Unit {
   occupancyLimit        Int? // rooms only; null/ignored for shops
   monthlyRent           Decimal
   securityDepositAmount Decimal
-  status                UnitStatus  @default(VACANT)
+  status                UnitStatus @default(VACANT)
 
-  agreements            Agreement[]
-  tenants               Tenant[]
-  propertyId            String
-  property              Property    @relation(fields: [propertyId], references: [id])
+  agreements Agreement[]
+  tenants    Tenant[]
+  propertyId String
+  property   Property    @relation(fields: [propertyId], references: [id])
 
   pictureUrl      String?
   picturePublicId String?
@@ -24,5 +24,4 @@ model Unit {
   @@unique([propertyId, unitNo])
   @@index([status])
   @@map("units")
-  
 }

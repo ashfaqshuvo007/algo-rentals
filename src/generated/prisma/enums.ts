@@ -60,6 +60,8 @@ export type PaymentStatus = (typeof PaymentStatus)[keyof typeof PaymentStatus]
 export const AgreementStatus = {
   DRAFT: 'DRAFT',
   PENDING_PAYMENT: 'PENDING_PAYMENT',
+  PENDING_APPROVAL: 'PENDING_APPROVAL',
+  PENDING_TERMINATION: 'PENDING_TERMINATION',
   ACTIVE: 'ACTIVE',
   TERMINATED: 'TERMINATED',
   EXPIRED: 'EXPIRED'

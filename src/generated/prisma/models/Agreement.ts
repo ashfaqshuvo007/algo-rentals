@@ -46,6 +46,8 @@ export type AgreementMinAggregateOutputType = {
   monthlyRent: runtime.Decimal | null
   securityDepositAmount: runtime.Decimal | null
   activatedAt: Date | null
+  terminationRequestedAt: Date | null
+  terminationReason: string | null
   terminatedAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -61,6 +63,8 @@ export type AgreementMaxAggregateOutputType = {
   monthlyRent: runtime.Decimal | null
   securityDepositAmount: runtime.Decimal | null
   activatedAt: Date | null
+  terminationRequestedAt: Date | null
+  terminationReason: string | null
   terminatedAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -76,6 +80,8 @@ export type AgreementCountAggregateOutputType = {
   monthlyRent: number
   securityDepositAmount: number
   activatedAt: number
+  terminationRequestedAt: number
+  terminationReason: number
   terminatedAt: number
   createdAt: number
   updatedAt: number
@@ -103,6 +109,8 @@ export type AgreementMinAggregateInputType = {
   monthlyRent?: true
   securityDepositAmount?: true
   activatedAt?: true
+  terminationRequestedAt?: true
+  terminationReason?: true
   terminatedAt?: true
   createdAt?: true
   updatedAt?: true
@@ -118,6 +126,8 @@ export type AgreementMaxAggregateInputType = {
   monthlyRent?: true
   securityDepositAmount?: true
   activatedAt?: true
+  terminationRequestedAt?: true
+  terminationReason?: true
   terminatedAt?: true
   createdAt?: true
   updatedAt?: true
@@ -133,6 +143,8 @@ export type AgreementCountAggregateInputType = {
   monthlyRent?: true
   securityDepositAmount?: true
   activatedAt?: true
+  terminationRequestedAt?: true
+  terminationReason?: true
   terminatedAt?: true
   createdAt?: true
   updatedAt?: true
@@ -235,6 +247,8 @@ export type AgreementGroupByOutputType = {
   monthlyRent: runtime.Decimal
   securityDepositAmount: runtime.Decimal
   activatedAt: Date | null
+  terminationRequestedAt: Date | null
+  terminationReason: string | null
   terminatedAt: Date | null
   createdAt: Date
   updatedAt: Date
@@ -273,6 +287,8 @@ export type AgreementWhereInput = {
   monthlyRent?: Prisma.DecimalFilter<"Agreement"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   securityDepositAmount?: Prisma.DecimalFilter<"Agreement"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   activatedAt?: Prisma.DateTimeNullableFilter<"Agreement"> | Date | string | null
+  terminationRequestedAt?: Prisma.DateTimeNullableFilter<"Agreement"> | Date | string | null
+  terminationReason?: Prisma.StringNullableFilter<"Agreement"> | string | null
   terminatedAt?: Prisma.DateTimeNullableFilter<"Agreement"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Agreement"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Agreement"> | Date | string
@@ -291,6 +307,8 @@ export type AgreementOrderByWithRelationInput = {
   monthlyRent?: Prisma.SortOrder
   securityDepositAmount?: Prisma.SortOrder
   activatedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  terminationRequestedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  terminationReason?: Prisma.SortOrderInput | Prisma.SortOrder
   terminatedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -312,6 +330,8 @@ export type AgreementWhereUniqueInput = Prisma.AtLeast<{
   monthlyRent?: Prisma.DecimalFilter<"Agreement"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   securityDepositAmount?: Prisma.DecimalFilter<"Agreement"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   activatedAt?: Prisma.DateTimeNullableFilter<"Agreement"> | Date | string | null
+  terminationRequestedAt?: Prisma.DateTimeNullableFilter<"Agreement"> | Date | string | null
+  terminationReason?: Prisma.StringNullableFilter<"Agreement"> | string | null
   terminatedAt?: Prisma.DateTimeNullableFilter<"Agreement"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Agreement"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Agreement"> | Date | string
@@ -330,6 +350,8 @@ export type AgreementOrderByWithAggregationInput = {
   monthlyRent?: Prisma.SortOrder
   securityDepositAmount?: Prisma.SortOrder
   activatedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  terminationRequestedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  terminationReason?: Prisma.SortOrderInput | Prisma.SortOrder
   terminatedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -353,6 +375,8 @@ export type AgreementScalarWhereWithAggregatesInput = {
   monthlyRent?: Prisma.DecimalWithAggregatesFilter<"Agreement"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   securityDepositAmount?: Prisma.DecimalWithAggregatesFilter<"Agreement"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   activatedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Agreement"> | Date | string | null
+  terminationRequestedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Agreement"> | Date | string | null
+  terminationReason?: Prisma.StringNullableWithAggregatesFilter<"Agreement"> | string | null
   terminatedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Agreement"> | Date | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Agreement"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Agreement"> | Date | string
@@ -366,6 +390,8 @@ export type AgreementCreateInput = {
   monthlyRent: runtime.Decimal | runtime.DecimalJsLike | number | string
   securityDepositAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
   activatedAt?: Date | string | null
+  terminationRequestedAt?: Date | string | null
+  terminationReason?: string | null
   terminatedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -384,6 +410,8 @@ export type AgreementUncheckedCreateInput = {
   monthlyRent: runtime.Decimal | runtime.DecimalJsLike | number | string
   securityDepositAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
   activatedAt?: Date | string | null
+  terminationRequestedAt?: Date | string | null
+  terminationReason?: string | null
   terminatedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -398,6 +426,8 @@ export type AgreementUpdateInput = {
   monthlyRent?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   securityDepositAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   activatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  terminationRequestedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  terminationReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   terminatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -416,6 +446,8 @@ export type AgreementUncheckedUpdateInput = {
   monthlyRent?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   securityDepositAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   activatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  terminationRequestedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  terminationReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   terminatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -432,6 +464,8 @@ export type AgreementCreateManyInput = {
   monthlyRent: runtime.Decimal | runtime.DecimalJsLike | number | string
   securityDepositAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
   activatedAt?: Date | string | null
+  terminationRequestedAt?: Date | string | null
+  terminationReason?: string | null
   terminatedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -445,6 +479,8 @@ export type AgreementUpdateManyMutationInput = {
   monthlyRent?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   securityDepositAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   activatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  terminationRequestedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  terminationReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   terminatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -460,6 +496,8 @@ export type AgreementUncheckedUpdateManyInput = {
   monthlyRent?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   securityDepositAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   activatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  terminationRequestedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  terminationReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   terminatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -475,6 +513,8 @@ export type AgreementCountOrderByAggregateInput = {
   monthlyRent?: Prisma.SortOrder
   securityDepositAmount?: Prisma.SortOrder
   activatedAt?: Prisma.SortOrder
+  terminationRequestedAt?: Prisma.SortOrder
+  terminationReason?: Prisma.SortOrder
   terminatedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -495,6 +535,8 @@ export type AgreementMaxOrderByAggregateInput = {
   monthlyRent?: Prisma.SortOrder
   securityDepositAmount?: Prisma.SortOrder
   activatedAt?: Prisma.SortOrder
+  terminationRequestedAt?: Prisma.SortOrder
+  terminationReason?: Prisma.SortOrder
   terminatedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -510,6 +552,8 @@ export type AgreementMinOrderByAggregateInput = {
   monthlyRent?: Prisma.SortOrder
   securityDepositAmount?: Prisma.SortOrder
   activatedAt?: Prisma.SortOrder
+  terminationRequestedAt?: Prisma.SortOrder
+  terminationReason?: Prisma.SortOrder
   terminatedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -557,6 +601,10 @@ export type DecimalFieldUpdateOperationsInput = {
   decrement?: runtime.Decimal | runtime.DecimalJsLike | number | string
   multiply?: runtime.Decimal | runtime.DecimalJsLike | number | string
   divide?: runtime.Decimal | runtime.DecimalJsLike | number | string
+}
+
+export type NullableStringFieldUpdateOperationsInput = {
+  set?: string | null
 }
 
 export type AgreementCreateNestedOneWithoutPaymentsInput = {
@@ -657,6 +705,8 @@ export type AgreementCreateWithoutPaymentsInput = {
   monthlyRent: runtime.Decimal | runtime.DecimalJsLike | number | string
   securityDepositAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
   activatedAt?: Date | string | null
+  terminationRequestedAt?: Date | string | null
+  terminationReason?: string | null
   terminatedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -674,6 +724,8 @@ export type AgreementUncheckedCreateWithoutPaymentsInput = {
   monthlyRent: runtime.Decimal | runtime.DecimalJsLike | number | string
   securityDepositAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
   activatedAt?: Date | string | null
+  terminationRequestedAt?: Date | string | null
+  terminationReason?: string | null
   terminatedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -703,6 +755,8 @@ export type AgreementUpdateWithoutPaymentsInput = {
   monthlyRent?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   securityDepositAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   activatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  terminationRequestedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  terminationReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   terminatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -720,6 +774,8 @@ export type AgreementUncheckedUpdateWithoutPaymentsInput = {
   monthlyRent?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   securityDepositAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   activatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  terminationRequestedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  terminationReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   terminatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -733,6 +789,8 @@ export type AgreementCreateWithoutTenantInput = {
   monthlyRent: runtime.Decimal | runtime.DecimalJsLike | number | string
   securityDepositAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
   activatedAt?: Date | string | null
+  terminationRequestedAt?: Date | string | null
+  terminationReason?: string | null
   terminatedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -749,6 +807,8 @@ export type AgreementUncheckedCreateWithoutTenantInput = {
   monthlyRent: runtime.Decimal | runtime.DecimalJsLike | number | string
   securityDepositAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
   activatedAt?: Date | string | null
+  terminationRequestedAt?: Date | string | null
+  terminationReason?: string | null
   terminatedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -779,6 +839,8 @@ export type AgreementUpdateWithoutTenantInput = {
   monthlyRent?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   securityDepositAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   activatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  terminationRequestedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  terminationReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   terminatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -795,6 +857,8 @@ export type AgreementUncheckedUpdateWithoutTenantInput = {
   monthlyRent?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   securityDepositAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   activatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  terminationRequestedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  terminationReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   terminatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -809,6 +873,8 @@ export type AgreementCreateWithoutUnitInput = {
   monthlyRent: runtime.Decimal | runtime.DecimalJsLike | number | string
   securityDepositAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
   activatedAt?: Date | string | null
+  terminationRequestedAt?: Date | string | null
+  terminationReason?: string | null
   terminatedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -825,6 +891,8 @@ export type AgreementUncheckedCreateWithoutUnitInput = {
   monthlyRent: runtime.Decimal | runtime.DecimalJsLike | number | string
   securityDepositAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
   activatedAt?: Date | string | null
+  terminationRequestedAt?: Date | string | null
+  terminationReason?: string | null
   terminatedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -870,6 +938,8 @@ export type AgreementScalarWhereInput = {
   monthlyRent?: Prisma.DecimalFilter<"Agreement"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   securityDepositAmount?: Prisma.DecimalFilter<"Agreement"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   activatedAt?: Prisma.DateTimeNullableFilter<"Agreement"> | Date | string | null
+  terminationRequestedAt?: Prisma.DateTimeNullableFilter<"Agreement"> | Date | string | null
+  terminationReason?: Prisma.StringNullableFilter<"Agreement"> | string | null
   terminatedAt?: Prisma.DateTimeNullableFilter<"Agreement"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Agreement"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Agreement"> | Date | string
@@ -884,6 +954,8 @@ export type AgreementCreateManyUnitInput = {
   monthlyRent: runtime.Decimal | runtime.DecimalJsLike | number | string
   securityDepositAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
   activatedAt?: Date | string | null
+  terminationRequestedAt?: Date | string | null
+  terminationReason?: string | null
   terminatedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -897,6 +969,8 @@ export type AgreementUpdateWithoutUnitInput = {
   monthlyRent?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   securityDepositAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   activatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  terminationRequestedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  terminationReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   terminatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -913,6 +987,8 @@ export type AgreementUncheckedUpdateWithoutUnitInput = {
   monthlyRent?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   securityDepositAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   activatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  terminationRequestedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  terminationReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   terminatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -928,6 +1004,8 @@ export type AgreementUncheckedUpdateManyWithoutUnitInput = {
   monthlyRent?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   securityDepositAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   activatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  terminationRequestedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  terminationReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   terminatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -974,6 +1052,8 @@ export type AgreementSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   monthlyRent?: boolean
   securityDepositAmount?: boolean
   activatedAt?: boolean
+  terminationRequestedAt?: boolean
+  terminationReason?: boolean
   terminatedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -993,6 +1073,8 @@ export type AgreementSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ext
   monthlyRent?: boolean
   securityDepositAmount?: boolean
   activatedAt?: boolean
+  terminationRequestedAt?: boolean
+  terminationReason?: boolean
   terminatedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -1010,6 +1092,8 @@ export type AgreementSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ext
   monthlyRent?: boolean
   securityDepositAmount?: boolean
   activatedAt?: boolean
+  terminationRequestedAt?: boolean
+  terminationReason?: boolean
   terminatedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -1027,12 +1111,14 @@ export type AgreementSelectScalar = {
   monthlyRent?: boolean
   securityDepositAmount?: boolean
   activatedAt?: boolean
+  terminationRequestedAt?: boolean
+  terminationReason?: boolean
   terminatedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type AgreementOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "tenantProfileId" | "unitId" | "status" | "startDate" | "endDate" | "monthlyRent" | "securityDepositAmount" | "activatedAt" | "terminatedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["agreement"]>
+export type AgreementOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "tenantProfileId" | "unitId" | "status" | "startDate" | "endDate" | "monthlyRent" | "securityDepositAmount" | "activatedAt" | "terminationRequestedAt" | "terminationReason" | "terminatedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["agreement"]>
 export type AgreementInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   tenant?: boolean | Prisma.TenantDefaultArgs<ExtArgs>
   unit?: boolean | Prisma.UnitDefaultArgs<ExtArgs>
@@ -1065,6 +1151,8 @@ export type $AgreementPayload<ExtArgs extends runtime.Types.Extensions.InternalA
     monthlyRent: runtime.Decimal
     securityDepositAmount: runtime.Decimal
     activatedAt: Date | null
+    terminationRequestedAt: Date | null
+    terminationReason: string | null
     terminatedAt: Date | null
     createdAt: Date
     updatedAt: Date
@@ -1503,6 +1591,8 @@ export interface AgreementFieldRefs {
   readonly monthlyRent: Prisma.FieldRef<"Agreement", 'Decimal'>
   readonly securityDepositAmount: Prisma.FieldRef<"Agreement", 'Decimal'>
   readonly activatedAt: Prisma.FieldRef<"Agreement", 'DateTime'>
+  readonly terminationRequestedAt: Prisma.FieldRef<"Agreement", 'DateTime'>
+  readonly terminationReason: Prisma.FieldRef<"Agreement", 'String'>
   readonly terminatedAt: Prisma.FieldRef<"Agreement", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"Agreement", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Agreement", 'DateTime'>

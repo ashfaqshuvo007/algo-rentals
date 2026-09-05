@@ -102,6 +102,80 @@ const getBkashIdToken = async () => {
 	}
 };
 
+const createBkashPayment = async (payload: {
+	amount: number;
+	payerReference: string;
+	callbackURL: string;
+	merchantInvoiceNumber: string;
+}) => {
+	const idToken = await getBkashIdToken();
+
+	const response = await fetch(
+		`${config.bkash_base_url}/tokenized/checkout/create`,
+		{
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+				Accept: "application/json",
+				Authorization: idToken as string,
+				"X-App-Key": config.bkash_app_key,
+			},
+			body: JSON.stringify({
+				mode: "0011",
+				payerReference: payload.payerReference,
+				callbackURL: payload.callbackURL,
+				amount: payload.amount.toString(),
+				currency: "BDT",
+				intent: "sale",
+				merchantInvoiceNumber: payload.merchantInvoiceNumber,
+			}),
+		},
+	);
+
+	if (!response.ok) {
+		throw new Error("Bkash Create Payment Failed.");
+	}
+
+	const result = await response.json();
+
+	if (result.statusCode && result.statusCode !== "0000") {
+		throw new Error(result.statusMessage || "Bkash Create Payment Failed.");
+	}
+
+	return result as { paymentID: string; bkashURL: string };
+};
+
+const executeBkashPayment = async (paymentID: string) => {
+	const idToken = await getBkashIdToken();
+
+	const response = await fetch(
+		`${config.bkash_base_url}/tokenized/checkout/execute`,
+		{
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+				Accept: "application/json",
+				Authorization: idToken as string,
+				"X-App-Key": config.bkash_app_key,
+			},
+			body: JSON.stringify({ paymentID }),
+		},
+	);
+
+	if (!response.ok) {
+		throw new Error("Bkash Execute Payment Failed.");
+	}
+
+	return (await response.json()) as {
+		paymentID: string;
+		trxID?: string;
+		transactionStatus: string;
+		amount: string;
+	};
+};
+
 export const BkashConfig = {
 	getBkashIdToken,
+	createBkashPayment,
+	executeBkashPayment,
 };

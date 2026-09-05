@@ -1,19 +1,23 @@
 model Payment {
-  id                 String        @id @default(uuid())
-  tenantProfileId    String?       @unique
-  tenant             Tenant?       @relation(fields: [tenantProfileId], references: [id])
-  agreementId  String?
-  agreement          Agreement?    @relation(fields: [agreementId], references: [id])
+  id              String     @id @default(uuid())
+  tenantProfileId String?
+  tenant          Tenant?    @relation(fields: [tenantProfileId], references: [id])
+  agreementId     String?
+  agreement       Agreement? @relation(fields: [agreementId], references: [id])
+
   type               PaymentType
   method             PaymentMethod @default(BKASH)
   amount             Decimal
+  bkashPaymentId     String?       @unique
   bkashTransactionId String?       @unique
   gatewayResponse    Json?
-  status             PaymentStatus @default(INITIATED)
-  paidAt             DateTime?
-  createdAt          DateTime      @default(now())
+
+  status    PaymentStatus @default(INITIATED)
+  paidAt    DateTime?
+  createdAt DateTime      @default(now())
 
   @@index([status])
+  @@index([bkashPaymentId])
   @@index([bkashTransactionId])
   @@map("payments")
 }
