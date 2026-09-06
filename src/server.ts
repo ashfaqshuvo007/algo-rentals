@@ -6,6 +6,7 @@ import { redisClient } from "./app/lib/redis";
 import {
 	seedAdmin,
 	seedSuperAdmin,
+	seedTestProperty,
 	seedTestOwner,
 	seedTestTenant,
 } from "./app/utils/dbSeed";
@@ -23,6 +24,7 @@ const main = async () => {
 		await seedSuperAdmin();
 		await seedAdmin();
 		await seedTestOwner();
+		await seedTestProperty();
 		await seedTestTenant();
 		console.log("DB Seeded With Test Data Successfully.");
 

@@ -1,5 +1,5 @@
 import bcrypt from "bcryptjs";
-import { Role } from "../../generated/prisma/enums";
+import { Role, UnitStatus, UnitType } from "../../generated/prisma/enums";
 import config from "../config";
 import { prisma } from "../lib/prisma";
 
@@ -203,5 +203,70 @@ export const seedTestOwner = async () => {
 				email: config.test_owner_email,
 			},
 		});
+	}
+};
+
+export const seedTestProperty = async () => {
+	try {
+		const owner = await prisma.owner.findUnique({
+			where: { email: config.test_owner_email },
+			include: { property: true },
+		});
+
+		if (!owner) {
+			throw new Error("Test owner must be seeded before test property data.");
+		}
+
+		const property =
+			owner.property ??
+			(await prisma.property.create({
+				data: {
+					name: "Algo Test Residence",
+					address: "House 10, Road 5, Dhanmondi, Dhaka",
+					owner: { connect: { id: owner.id } },
+				},
+			}));
+
+		await prisma.unit.upsert({
+			where: {
+				propertyId_unitNo: { propertyId: property.id, unitNo: "A-101" },
+			},
+			update: {},
+			create: {
+				unitNo: "A-101",
+				type: UnitType.ROOM,
+				floor: 1,
+				lengthFt: 12,
+				widthFt: 10,
+				occupancyLimit: 3,
+				propertyId: property.id,
+				monthlyRent: 5500,
+				securityDepositAmount: 11000,
+				status: UnitStatus.VACANT,
+			},
+		});
+
+		await prisma.unit.upsert({
+			where: {
+				propertyId_unitNo: { propertyId: property.id, unitNo: "A-102" },
+			},
+			update: {},
+			create: {
+				unitNo: "A-102",
+				type: UnitType.ROOM,
+				floor: 1,
+				lengthFt: 14,
+				widthFt: 11,
+				occupancyLimit: 4,
+				propertyId: property.id,
+				monthlyRent: 7000,
+				securityDepositAmount: 14000,
+				status: UnitStatus.VACANT,
+			},
+		});
+
+		console.log("Test Property and Units Seeded.");
+	} catch (error) {
+		console.log("Error Seeding Test Property : ", error);
 	}
 };

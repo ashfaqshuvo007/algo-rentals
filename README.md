@@ -2,6 +2,8 @@
 
 Backend API for a rental property management platform. The service manages users, owners, tenants, properties, rental units, agreements, and payments through a TypeScript and Express application.
 
+- [API Docs](https://documenter.getpostman.com/view/7324207/2sBYAxNoWK)
+
 ## Features
 
 - Credential and Google authentication
@@ -104,7 +106,7 @@ BKASH_USERNAME=your-bkash-username
 BKASH_PASSWORD=your-bkash-password
 BKASH_APP_KEY=your-bkash-app-key
 BKASH_APP_SECRET=your-bkash-app-secret
-BKASH_CALLBACK_URL=http://localhost:5000/api/v1/payment/callback
+BKASH_CALLBACK_URL=http://localhost:5000/api/v1
 ```
 
 Use real values for the services enabled in your environment. Do not commit `.env` or any credentials to source control.
@@ -132,6 +134,16 @@ npm run dev
 ```
 
 The API is available at `http://localhost:5000` when `PORT=5000`.
+
+### Seeded Test Data
+
+On startup, the server creates the configured Super Admin, Admin, Owner, and Tenant records when they do not already exist. It also creates the following reusable rental fixtures for `TEST_OWNER_EMAIL`:
+
+- Property: `Algo Test Residence`
+- Unit: `A-101`, vacant room, monthly rent `5500`
+- Unit: `A-102`, vacant room, monthly rent `7000`
+
+The Postman collection contains login requests for the seeded owner and tenant. After logging in, copy the seeded record IDs into `OWNER_ID`, `TENANT_ID`, `PROPERTY_ID`, and `UNIT_ID` collection variables before running requests that require them. Agreement initiation also requires a tenant NID upload, and it starts a real bKash payment flow; it does not create a fake payment automatically.
 
 ## NPM Scripts
 
@@ -162,6 +174,8 @@ All application endpoints are versioned under `/api/v1`.
 | `POST` | `/reset-password` | Public |
 | `POST` | `/verify-email` | Public |
 
+Registration, password reset, and email verification use OTPs delivered through SMTP and stored in Redis for five minutes. Passwords must be 8–32 characters and include uppercase, lowercase, numeric, and special characters. Google authentication accepts an ID token and creates or links a tenant account.
+
 ### Properties: `/api/v1/property`
 
 | Method | Endpoint | Access |
@@ -186,10 +200,35 @@ The static `/my-properties` route is declared before `/:propertyId`; otherwise E
 | Method | Endpoint | Access |
 | --- | --- | --- |
 | `GET` | `/` | Admin, Owner, or Super Admin |
-| `POST` | `/` | Owner or Super Admin |
-| `PUT` | `/` | Owner or Super Admin |
+| `POST` | `/` | Owner or Admin |
+| `PATCH` | `/:unitId` | Owner, Admin, or Super Admin |
 | `GET` | `/:unitId` | Admin, Owner, or Super Admin |
 | `GET` | `/:unitId/tenants` | Admin, Owner, or Super Admin |
+
+Unit list filters are supplied as query parameters: `page`, `limit`, `status`, `occupancyLimit`, `type`, `floor`, `propertyId`, `minRent`, and `maxRent`. Numeric JSON body fields must be sent as numbers, not strings.
+
+### Agreements: `/api/v1/agreement`
+
+| Method | Endpoint | Access | Description |
+| --- | --- | --- | --- |
+| `POST` | `/initiate` | Tenant, Admin, or Super Admin | Create an agreement and start the security-deposit payment |
+| `GET` | `/create-agreement/payment/callback` | Public callback | Process the bKash payment result and redirect to the frontend |
+| `PATCH` | `/:agreementId/finalize` | Owner | Approve and activate a paid agreement |
+| `POST` | `/:agreementId/retry-payment` | Tenant, Admin, or Super Admin | Retry a pending security-deposit payment |
+| `POST` | `/:agreementId/terminate/request` | Tenant | Request termination of an active agreement |
+| `PATCH` | `/:agreementId/terminate` | Owner | Approve termination and release the unit |
+| `PATCH` | `/:agreementId/terminate/reject` | Owner | Reject a termination request |
+
+#### Agreement lifecycle
+
+1. A tenant, admin, or super admin initiates an agreement with `unitId` and `startDate`. Admins and super admins must also provide `tenantId`.
+2. The tenant must have a NID number and uploaded NID document, and the unit must be vacant.
+3. The service creates the agreement and security-deposit payment, reserves the unit, and assigns it to the tenant.
+4. bKash handles payment externally. The callback updates the payment and moves a successful agreement to `PENDING_APPROVAL`.
+5. The property owner finalizes the agreement, changing it to `ACTIVE` and the unit to `OCCUPIED`.
+6. The tenant may request termination. The owner can approve it, releasing the unit, or reject it.
+
+Agreement initiation and payment retry call the real bKash gateway; they are not mock endpoints. The Postman callback request is only a template and requires a real `paymentID` from bKash.
 
 ## Authentication
 
@@ -199,6 +238,39 @@ Authentication accepts an access token from either:
 2. The `Authorization` header using `Bearer <token>`
 
 The server enables CORS credentials, so browser clients must send requests with credentials when using cookie-based authentication. Authorization errors are returned when the authenticated user does not have one of the roles required by an endpoint.
+
+The refresh-token endpoint reads the `refreshToken` cookie and returns a new access/refresh-token pair. Login and Google login return the tokens in the response body as well as setting cookies.
+
+## Data Model
+
+Prisma schema files are split under `prisma/schema/`:
+
+- `User`: shared identity, role, credential/Google authentication state, verification, and account status.
+- `Owner`: owner profile linked one-to-one with a user and optionally linked to one property.
+- `Tenant`: tenant profile linked one-to-one with a user, optionally assigned to one unit, and linked to one agreement.
+- `Property`: uniquely named rental property with an optional owner and many units.
+- `Unit`: room or shop with rent, deposit, dimensions, occupancy, and vacancy status.
+- `Agreement`: tenant-unit rental agreement with payment, activation, and termination state.
+- `Payment`: security-deposit or rent payment with bKash identifiers, gateway response, and payment status.
+
+Important enum values include:
+
+- Roles: `SUPER_ADMIN`, `ADMIN`, `OWNER`, `TENANT`
+- Unit types: `ROOM`, `SHOP`
+- Unit statuses: `VACANT`, `RESERVED`, `OCCUPIED`, `MAINTENANCE`
+- Agreement statuses: `DRAFT`, `PENDING_PAYMENT`, `PENDING_APPROVAL`, `ACTIVE`, `TERMINATED`, `EXPIRED`
+- Payment statuses: `INITIATED`, `UNPAID`, `PAID`, `FAILED`, `CANCELLED`, `REFUNDED`
+
+## Integrations
+
+- **PostgreSQL and Prisma:** application data and migrations.
+- **Redis:** OTP storage and bKash token caching.
+- **Nodemailer/SMTP:** email verification, password reset, and application emails.
+- **Cloudinary:** profile image and tenant NID uploads. Multer stores uploads in memory before sending them to Cloudinary.
+- **Google OAuth:** verifies Google ID tokens and supports tenant account login/linking.
+- **bKash:** security-deposit payment creation, token management, execution, and callback handling.
+
+The `/test` endpoint is a bKash integration diagnostic: it requests a bKash ID token, so it requires valid bKash configuration rather than functioning as a simple health check.
 
 ## Project Structure
 
@@ -229,5 +301,9 @@ curl http://localhost:5000/
 ## Development Notes
 
 - `src/server.ts` connects to PostgreSQL and Redis, seeds configured test data, verifies Nodemailer, and then starts the HTTP server.
+- The Postman collection is [Algo-Rental-Backend.postman_collection.json](Algo-Rental-Backend.postman_collection.json) and targets the `/api/v1` route prefix.
 - Keep generated Prisma output in `src/generated/prisma/` in sync with schema changes.
-- The repository currently has no automated test suite configured; use the build, format, and lint scripts as baseline checks.
+- The repository currently has no automated test suite configured; `npm test` exits with an intentional placeholder failure. Use the build, format, and lint scripts as baseline checks.
+- Startup does not listen until PostgreSQL, Redis, and SMTP initialization succeeds.
+- Seed functions check for an existing user by role, so an existing user with the same role can prevent the configured seed email from being created.
+- `GET /api/v1/unit/:unitId/tenants` currently returns an empty object from the controller rather than the tenant service result.

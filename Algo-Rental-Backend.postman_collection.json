@@ -1,0 +1,599 @@
+{
+  "info": {
+    "_postman_id": "b398b038-f5a3-40ad-aec3-8c29ab02e672",
+    "name": "Algo Rental Backend",
+    "description": "Current API collection. Run the server seed first, then set the ID variables from the seeded records.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Health",
+      "item": [
+        {
+          "name": "API Welcome",
+          "request": { "method": "GET", "url": "{{BASE_URL}}/" }
+        },
+        {
+          "name": "Test bKash Integration",
+          "request": { "method": "GET", "url": "{{SERVER_URL}}/test" }
+        }
+      ]
+    },
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Register Tenant",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"New Tenant\",\n  \"email\": \"new.tenant@example.com\",\n  \"password\": \"Tenant@12345\",\n  \"tenant\": {\n    \"contactNumber\": \"01700000000\",\n    \"nidNumber\": \"1234567890\",\n    \"presentAddress\": \"Dhaka, Bangladesh\"\n  }\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": "{{BASE_URL}}/api/v1/auth/register"
+          }
+        },
+        {
+          "name": "Login Test Owner",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text",
+                "exec": [
+                  "const json = pm.response.json();",
+                  "if (json.data?.accessToken) pm.collectionVariables.set('ACCESS_TOKEN', json.data.accessToken);",
+                  "if (json.data?.refreshToken) pm.collectionVariables.set('REFRESH_TOKEN', json.data.refreshToken);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"{{TEST_OWNER_EMAIL}}\",\n  \"password\": \"{{TEST_OWNER_PASSWORD}}\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": "{{BASE_URL}}/api/v1/auth/login"
+          }
+        },
+        {
+          "name": "Login Test Tenant",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text",
+                "exec": [
+                  "const json = pm.response.json();",
+                  "if (json.data?.accessToken) pm.collectionVariables.set('ACCESS_TOKEN', json.data.accessToken);",
+                  "if (json.data?.refreshToken) pm.collectionVariables.set('REFRESH_TOKEN', json.data.refreshToken);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"{{TEST_TENANT_EMAIL}}\",\n  \"password\": \"{{TEST_TENANT_PASSWORD}}\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": "{{BASE_URL}}/api/v1/auth/login"
+          }
+        },
+        {
+          "name": "Get Logged-in User",
+          "request": {
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{ACCESS_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": "{{BASE_URL}}/api/v1/auth/me"
+          }
+        },
+        {
+          "name": "Google Login",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"idToken\": \"GOOGLE_ID_TOKEN\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": "{{BASE_URL}}/api/v1/auth/google"
+          }
+        },
+        {
+          "name": "Forgot Password",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"{{TEST_TENANT_EMAIL}}\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": "{{BASE_URL}}/api/v1/auth/forgot-password"
+          }
+        },
+        {
+          "name": "Reset Password",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"{{TEST_TENANT_EMAIL}}\",\n  \"newPassword\": \"Tenant@12345\",\n  \"otp\": \"OTP_FROM_EMAIL\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": "{{BASE_URL}}/api/v1/auth/reset-password"
+          }
+        },
+        {
+          "name": "Verify Email",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"new.tenant@example.com\",\n  \"otp\": \"OTP_FROM_EMAIL\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": "{{BASE_URL}}/api/v1/auth/verify-email"
+          }
+        },
+        {
+          "name": "Refresh Token",
+          "request": {
+            "method": "POST",
+            "url": "{{BASE_URL}}/api/v1/auth/refresh-token"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Tenant",
+      "item": [
+        {
+          "name": "Upload Profile Image",
+          "request": {
+            "method": "PATCH",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{ACCESS_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "body": {
+              "mode": "formdata",
+              "formdata": [{ "key": "profileImage", "type": "file", "src": "" }]
+            },
+            "url": "{{BASE_URL}}/api/v1/tenant/profile-image"
+          }
+        },
+        {
+          "name": "Upload Tenant NID",
+          "request": {
+            "method": "PATCH",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{ACCESS_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                { "key": "nid", "type": "file", "src": "" },
+                { "key": "nidNumber", "value": "1234567890", "type": "text" }
+              ]
+            },
+            "url": "{{BASE_URL}}/api/v1/tenant/nid"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Property",
+      "item": [
+        {
+          "name": "Get All Properties",
+          "request": {
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{ACCESS_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": "{{BASE_URL}}/api/v1/property"
+          }
+        },
+        {
+          "name": "Get Owner Properties",
+          "request": {
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{ACCESS_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": "{{BASE_URL}}/api/v1/property/my-properties"
+          }
+        },
+        {
+          "name": "Get Single Property",
+          "request": {
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{ACCESS_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": "{{BASE_URL}}/api/v1/property/{{PROPERTY_ID}}"
+          }
+        },
+        {
+          "name": "Create Property",
+          "request": {
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{ACCESS_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"New Test Property\",\n  \"address\": \"House 2, Road 2, Dhaka\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": "{{BASE_URL}}/api/v1/property"
+          }
+        },
+        {
+          "name": "Assign Owner to Property",
+          "request": {
+            "method": "PATCH",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{ACCESS_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ownerId\": \"{{OWNER_ID}}\",\n  \"propertyId\": \"{{PROPERTY_ID}}\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": "{{BASE_URL}}/api/v1/property/assign-owner"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Unit",
+      "item": [
+        {
+          "name": "Get All Units",
+          "request": {
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{ACCESS_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": "{{BASE_URL}}/api/v1/unit?limit=10&page=1&status=VACANT&type=ROOM&propertyId={{PROPERTY_ID}}"
+          }
+        },
+        {
+          "name": "Get Single Unit",
+          "request": {
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{ACCESS_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": "{{BASE_URL}}/api/v1/unit/{{UNIT_ID}}"
+          }
+        },
+        {
+          "name": "Get Unit Tenants",
+          "request": {
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{ACCESS_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": "{{BASE_URL}}/api/v1/unit/{{UNIT_ID}}/tenants"
+          }
+        },
+        {
+          "name": "Create Unit",
+          "request": {
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{ACCESS_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"unitNo\": \"A-103\",\n  \"type\": \"ROOM\",\n  \"floor\": 1,\n  \"lengthFt\": 12,\n  \"widthFt\": 10,\n  \"occupancyLimit\": 3,\n  \"propertyId\": \"{{PROPERTY_ID}}\",\n  \"monthlyRent\": 5500,\n  \"securityDepositAmount\": 11000\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": "{{BASE_URL}}/api/v1/unit"
+          }
+        },
+        {
+          "name": "Update Unit",
+          "request": {
+            "method": "PATCH",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{ACCESS_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"VACANT\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": "{{BASE_URL}}/api/v1/unit/{{UNIT_ID}}"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Agreement",
+      "item": [
+        {
+          "name": "Initiate Agreement as Tenant",
+          "request": {
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{ACCESS_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"unitId\": \"{{UNIT_ID}}\",\n  \"startDate\": \"2026-10-01\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": "{{BASE_URL}}/api/v1/agreement/initiate"
+          }
+        },
+        {
+          "name": "Initiate Agreement for Tenant",
+          "request": {
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{ACCESS_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"unitId\": \"{{UNIT_ID}}\",\n  \"tenantId\": \"{{TENANT_ID}}\",\n  \"startDate\": \"2026-10-01\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": "{{BASE_URL}}/api/v1/agreement/initiate"
+          }
+        },
+        {
+          "name": "Agreement Payment Callback",
+          "request": {
+            "method": "GET",
+            "url": "{{BASE_URL}}/api/v1/agreement/create-agreement/payment/callback?paymentID=BKASH_PAYMENT_ID&status=success"
+          }
+        },
+        {
+          "name": "Finalize Agreement",
+          "request": {
+            "method": "PATCH",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{ACCESS_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"startDate\": \"2026-10-01\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": "{{BASE_URL}}/api/v1/agreement/{{AGREEMENT_ID}}/finalize"
+          }
+        },
+        {
+          "name": "Retry Agreement Payment",
+          "request": {
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{ACCESS_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": "{{BASE_URL}}/api/v1/agreement/{{AGREEMENT_ID}}/retry-payment"
+          }
+        },
+        {
+          "name": "Request Agreement Termination",
+          "request": {
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{ACCESS_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"reason\": \"Moving to another city\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": "{{BASE_URL}}/api/v1/agreement/{{AGREEMENT_ID}}/terminate/request"
+          }
+        },
+        {
+          "name": "Terminate Agreement",
+          "request": {
+            "method": "PATCH",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{ACCESS_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"reason\": \"Approved termination\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": "{{BASE_URL}}/api/v1/agreement/{{AGREEMENT_ID}}/terminate"
+          }
+        },
+        {
+          "name": "Reject Termination Request",
+          "request": {
+            "method": "PATCH",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{ACCESS_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": "{{BASE_URL}}/api/v1/agreement/{{AGREEMENT_ID}}/terminate/reject"
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    { "key": "SERVER_URL", "value": "http://localhost:5000" },
+    { "key": "BASE_URL", "value": "http://localhost:5000" },
+    { "key": "ACCESS_TOKEN", "value": "" },
+    { "key": "REFRESH_TOKEN", "value": "" },
+    { "key": "TEST_OWNER_EMAIL", "value": "testowner@gmail.com" },
+    { "key": "TEST_OWNER_PASSWORD", "value": "Test@owner12345" },
+    { "key": "TEST_TENANT_EMAIL", "value": "testtenant@gmail.com" },
+    { "key": "TEST_TENANT_PASSWORD", "value": "Test@tenant12345" },
+    { "key": "OWNER_ID", "value": "" },
+    { "key": "TENANT_ID", "value": "" },
+    { "key": "PROPERTY_ID", "value": "" },
+    { "key": "UNIT_ID", "value": "" },
+    { "key": "AGREEMENT_ID", "value": "" }
+  ]
+}
