@@ -6,8 +6,8 @@ import { redisClient } from "./app/lib/redis";
 import {
 	seedAdmin,
 	seedSuperAdmin,
-	seedTestProperty,
 	seedTestOwner,
+	seedTestProperty,
 	seedTestTenant,
 } from "./app/utils/dbSeed";
 
@@ -31,9 +31,11 @@ const main = async () => {
 		await transporter.verify();
 		console.log("Nodemailer Connected Successfully.");
 
-		app.listen(PORT, () => {
-			console.log(`Server Is Running On Port ${PORT}`);
-		});
+		if (!process.env.VERCEL) {
+			app.listen(PORT, () => {
+				console.log(`Server Is Running On Port ${PORT}`);
+			});
+		}
 	} catch (error) {
 		console.error("Error Starting The Server:", error);
 		await prisma.$disconnect();
